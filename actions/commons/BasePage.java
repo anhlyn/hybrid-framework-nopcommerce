@@ -1,16 +1,22 @@
 package commons;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement; 
 import org.openqa.selenium.interactions.Actions;
 
+import org.openqa.selenium.support.ui.Select;
+
 public class BasePage {
 	
 	public void openPageUrl(WebDriver driver, String url) {
 		driver.get(url);
+	}
+	
+	public void closeBrowser(WebDriver driver) {
+		driver.close();
 	}
 	
 	public String getPageTitle(WebDriver driver) {
@@ -37,12 +43,12 @@ public class BasePage {
 		driver.navigate().refresh();
 	}
 	
-	public WebElement getWebElement(WebDriver driver, String locator) {
-		return driver.findElement(By.xpath(locator));
+	public void pageLoadTimeout(WebDriver driver, int x) {
+		driver.manage().timeouts().pageLoadTimeout(x, TimeUnit.MILLISECONDS);
 	}
 	
-	public List<WebElement> getWebElements(WebDriver driver, String locator){
-		return driver.findElements(By.xpath(locator));
+	private WebElement getWebElement(WebDriver driver, String locator) {
+		return driver.findElement(By.xpath(locator));
 	}
 	
 	public String getTextElement(WebElement element) {
@@ -97,6 +103,11 @@ public class BasePage {
 		if(element.isSelected()) {
 			element.click();
 		}
+	}
+	
+	public void selectDefaultDropdown(WebDriver driver, String locator, String item) {
+		Select cb = new Select(getWebElement(driver, locator));
+		cb.selectByVisibleText(item);
 	}
 	
 	public void clickToElement(WebElement element) {
