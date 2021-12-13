@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="Suite" verbose="1" >
+
+  <test name="RUN FACTORY" >
+  	
+  	<parameter name="browser" value="chrome" />  	
+    <classes>
+       <class name="com.nopcommerce.user.Level_05_Page_Factory" />
+    </classes>
+  </test>
+  
+  <test name="RUN PAGE OBJECT" >
+  	
+  	<parameter name="browser" value="chrome" />  	
+    <classes>
+       <class name="com.nopcommerce.user.Level_04_Multiple_Browser" />
+    </classes>
+  </test>
+  
+</suite>

@@ -85,8 +85,4 @@ public class RegisterObject extends BasePage {
 		return getTextElement(driver, RegisterUI.SUCCESS_MSG);
 	}
 	
-	public void closeBrowser() {
-		closeBrowser(driver);
-	}
-	
 }

@@ -15,8 +15,12 @@ public class BasePage {
 		driver.get(url);
 	}
 	
-	public void closeBrowser(WebDriver driver) {
+	public void closeFocusBrowser(WebDriver driver) {
 		driver.close();
+	}
+	
+	public void quitBrowsers(WebDriver driver) {
+		driver.quit();
 	}
 	
 	public String getPageTitle(WebDriver driver) {
@@ -105,6 +109,11 @@ public class BasePage {
 		}
 	}
 	
+	public void selectDefaultDropdown(WebElement element, String item) {
+		Select cb = new Select(element);
+		cb.selectByVisibleText(item);
+	}
+	
 	public void selectDefaultDropdown(WebDriver driver, String locator, String item) {
 		Select cb = new Select(getWebElement(driver, locator));
 		cb.selectByVisibleText(item);
@@ -168,7 +177,5 @@ public class BasePage {
 		WebElement b = getWebElement(driver, locatorB);
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
 	}
-	
-	
 	
 }
