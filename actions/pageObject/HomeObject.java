@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.GlobalContants;
-import pageUI.HomeUI;
+import pageUI.CommonUI;
 
 public class HomeObject extends BasePage{
 	
@@ -20,15 +20,15 @@ public class HomeObject extends BasePage{
 	}
 	
 	public String getH1Title() {
-		return getTextElement(driver, HomeUI.PAGE_TITLE);
+		return getTextElement(driver, CommonUI.PAGE_TITLE);
 	}
 	
 	public void clickLogOutNav() {
-		clickToElement(driver, HomeUI.LOGOUT_TOP_NAV);
+		clickToElement(driver, CommonUI.LOGOUT_TOP_NAV);
 	}
 	
 	public void clickRegisterNav() {
-		clickToElement(driver, HomeUI.REGISTER_TOP_NAV);
+		clickToElement(driver, CommonUI.REGISTER_TOP_NAV);
 	}
 	
 }

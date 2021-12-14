@@ -9,6 +9,11 @@ import org.openqa.selenium.interactions.Actions;
 
 import org.openqa.selenium.support.ui.Select;
 
+import pageObject.BlogObject;
+import pageObject.MyAccountObject;
+import pageObject.SitemapObject;
+import pageUI.CommonUI;
+
 public class BasePage {
 	
 	public void openPageUrl(WebDriver driver, String url) {
@@ -176,6 +181,22 @@ public class BasePage {
 		WebElement a = getWebElement(driver, locatorA);
 		WebElement b = getWebElement(driver, locatorB);
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
+	}
+	
+	//common actions
+	public MyAccountObject clickMyAccountLink(WebDriver driver) {
+		clickToElement(driver, CommonUI.MY_ACCOUNT_NAV);
+		return PageGeneratorManager.getMyAccountPage(driver);
+	}
+	
+	public SitemapObject clickSitemapLink(WebDriver driver) {
+		clickToElement(driver, CommonUI.SITEMAP_NAV);
+		return PageGeneratorManager.getSitemapPage(driver);
+	}
+	
+	public BlogObject clickBlogLink(WebDriver driver) {
+		clickToElement(driver, CommonUI.BLOG_NAV);
+		return PageGeneratorManager.getBlogPage(driver);
 	}
 	
 }
