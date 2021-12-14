@@ -2,19 +2,11 @@
   
 <suite name="Suite" verbose="1" >
 
-  <test name="RUN FACTORY" >
+  <test name="APPLY PAGE_GENERATOR_MANAGER" >
   	
   	<parameter name="browser" value="chrome" />  	
     <classes>
-       <class name="com.nopcommerce.user.Level_05_Page_Factory" />
-    </classes>
-  </test>
-  
-  <test name="RUN PAGE OBJECT" >
-  	
-  	<parameter name="browser" value="chrome" />  	
-    <classes>
-       <class name="com.nopcommerce.user.Level_04_Multiple_Browser" />
+       <class name="com.nopcommerce.user.Level_06_PageGeneratorManager" />
     </classes>
   </test>
   

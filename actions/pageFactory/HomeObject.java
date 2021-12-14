@@ -2,8 +2,8 @@ package pageFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import commons.BasePage;
 
@@ -16,15 +16,18 @@ public class HomeObject extends BasePage{
 		driver = mappingDriver;
 		url = "https://demo.nopcommerce.com/";
 		pageLoadTimeout(driver, 5000);
-		PageFactory.initElements(driver, this);
+		//PageFactory.initElements(driver, this);
 	}
 	
+	@CacheLookup
 	@FindBy(xpath = "//div[@class='page-title']//h1")
 	WebElement pageTitle;
 	
+	@CacheLookup
 	@FindBy(xpath = "//div[@class='header-links']//a[@class='ico-logout']")
 	WebElement logoutTopNav;
 	
+	@CacheLookup
 	@FindBy(xpath = "//div[@class='header-links']//a[@class='ico-register']")
 	WebElement registerTopNav;
 	

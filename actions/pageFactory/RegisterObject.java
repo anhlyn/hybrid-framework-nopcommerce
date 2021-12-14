@@ -2,71 +2,89 @@ package pageFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import commons.BasePage;
 
 public class RegisterObject extends BasePage {
 
-	private WebDriver driver;
+	WebDriver driver;
 	
 	public RegisterObject(WebDriver d) {
 		driver = d;
-		PageFactory.initElements(driver, this);
+		//PageFactory.initElements(driver, this);
 	}
 	
+	@CacheLookup
 	@FindBy(css = "#gender-male")
 	WebElement maleRdo;
 	
+	@CacheLookup
 	@FindBy(id = "gender-female")
 	WebElement femaleRdo;
 	
+	@CacheLookup
 	@FindBy(id = "FirstName")
 	WebElement fnameInput;
 	
+	@CacheLookup
 	@FindBy(id = "LastName")
 	WebElement lnameInput;
 	
+	@CacheLookup
 	@FindBy(xpath = "//select[@name='DateOfBirthDay']")
 	WebElement birthDaySelect;
 	
+	@CacheLookup
 	@FindBy(xpath = "//select[@name='DateOfBirthMonth']")
 	WebElement birthMonthSelect;
 	
+	@CacheLookup
 	@FindBy(xpath = "//select[@name='DateOfBirthYear']")
 	WebElement birthYearSelect;
 	
+	@CacheLookup
 	@FindBy(id = "Email")
 	WebElement emailInput;
 	
+	@CacheLookup
 	@FindBy(id = "Password")
 	WebElement passwordInput;
 	
+	@CacheLookup
 	@FindBy(css = "#ConfirmPassword")
 	WebElement cpasswordInput;
 	
+	@CacheLookup
 	@FindBy(css = "button#register-button")
 	WebElement registerButton;
 	
+	@CacheLookup
 	@FindBy(css = "span#FirstName-error")
 	WebElement fnameErrorMsg;
 	
+	@CacheLookup
 	@FindBy(css = "span#LastName-error")
 	WebElement lnameErrorMsg;
 	
+	@CacheLookup
 	@FindBy(css = "span#Email-error")
 	WebElement emailErrorMsg;
 	
+	@CacheLookup
 	@FindBy(css = "span#Password-error")
 	WebElement passwordErrorMsg;
 	
+	@CacheLookup
 	@FindBy(css = "span#ConfirmPassword-error")
 	WebElement cpasswordErrorMsg;
 	
+	@CacheLookup
 	@FindBy(xpath = "//div[@class='page-body']//div[contains(@class,'validation-summary-errors')]/ul/li")
 	WebElement summaryErrorMsg;
 	
+	@CacheLookup
 	@FindBy(xpath = "//div[@class='page-body']/div[@class='result']")
 	WebElement successMsg;
 	

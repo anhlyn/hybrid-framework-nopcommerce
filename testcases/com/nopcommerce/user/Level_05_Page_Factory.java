@@ -1,6 +1,7 @@
 package com.nopcommerce.user;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -34,8 +35,10 @@ public class Level_05_Page_Factory extends BaseTest{
 		
 		d = getBrowserDriver(b);
 		
-		registerPage = new RegisterObject(d);
-		homePage = new HomeObject(d);		
+		//registerPage = new RegisterObject(d);
+		//homePage = new HomeObject(d);		
+		registerPage = PageFactory.initElements(d, RegisterObject.class);
+		homePage = PageFactory.initElements(d, HomeObject.class);
 		email = generateRandomNumber();
 		System.out.println("NEW EMAIL: " + email);		
 		homePage.loadHomePage();
@@ -85,10 +88,14 @@ public class Level_05_Page_Factory extends BaseTest{
 		
 		Assert.assertEquals(registerPage.getSuccessMsg(), "Your registration completed");
 		homePage.clickLogOutNav();
+		homePage = PageFactory.initElements(d, HomeObject.class);
+		registerPage = PageFactory.initElements(d, RegisterObject.class);
 	}
 	
 	@Test(dependsOnMethods = "Register_03_Success")
 	public void Register_04_ExistedEmail() {
+		homePage = PageFactory.initElements(d, HomeObject.class);
+		registerPage = PageFactory.initElements(d, RegisterObject.class);
 		homePage.clickRegisterNav();
 		Assert.assertEquals(homePage.getH1Title(), "Register");
 		
@@ -116,10 +123,13 @@ public class Level_05_Page_Factory extends BaseTest{
 		
 		String expectedMsg = "Password must meet the following rules:\nmust have at least 6 characters";
 		Assert.assertEquals(registerPage.getPasswordErrorMsg(), expectedMsg);
+		
 	}
 	
 	@Test
 	public void Register_06_Pass_CPass_Not_Match() {
+		homePage = PageFactory.initElements(d, HomeObject.class);
+		registerPage = PageFactory.initElements(d, RegisterObject.class);
 		homePage.clickRegisterNav();
 		Assert.assertEquals(homePage.getH1Title(), "Register");
 		

@@ -3,21 +3,20 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import commons.GlobalContants;
 import pageUI.HomeUI;
 
 public class HomeObject extends BasePage{
 	
 	private WebDriver driver;
-	private String url;
 	
 	public HomeObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		url = "https://demo.nopcommerce.com/";
 		pageLoadTimeout(driver, 5000);
 	}
 	
 	public void loadHomePage() {
-		openPageUrl(driver, url);
+		openPageUrl(driver, GlobalContants.URL);
 	}
 	
 	public String getH1Title() {
