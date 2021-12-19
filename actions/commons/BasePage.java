@@ -56,32 +56,57 @@ public class BasePage {
 		driver.manage().timeouts().pageLoadTimeout(x, TimeUnit.MILLISECONDS);
 	}
 	
-	private WebElement getWebElement(WebDriver driver, String locator) {
-		return driver.findElement(By.xpath(locator));
+	private WebElement getWebElement(WebDriver driver, String locatorPattern, String... params) {
+		
+		System.out.println(locatorPattern);
+		String replacedLocator = String.format(locatorPattern, (Object[])params);
+		System.out.println(replacedLocator);
+		String lowerCaseLocatorPattern = replacedLocator.toLowerCase();
+		
+		By byObject = null;
+		//Only use 5 locator types: id/name/class/css/xpath
+		if(lowerCaseLocatorPattern.startsWith("id")) {
+			System.out.println("replacedLocator.substring: " + replacedLocator.substring(3));
+			byObject = By.id(replacedLocator.substring(3));
+		}else if(lowerCaseLocatorPattern.startsWith("name")) {
+			System.out.println("replacedLocator.substring: " + replacedLocator.substring(5));
+			byObject = By.name(replacedLocator.substring(5));
+		}else if(lowerCaseLocatorPattern.startsWith("class")) {
+			System.out.println("replacedLocator.substring: " + replacedLocator.substring(6));
+			byObject = By.className(replacedLocator.substring(6));
+		}else if(lowerCaseLocatorPattern.startsWith("css")) {
+			System.out.println("replacedLocator.substring: " + replacedLocator.substring(4));
+			byObject = By.cssSelector(replacedLocator.substring(4));
+		}else if(lowerCaseLocatorPattern.startsWith("xpath")) {
+			System.out.println("replacedLocator.substring: " + replacedLocator.substring(6));
+			byObject = By.xpath(replacedLocator.substring(6));
+		}
+		
+		return driver.findElement(byObject);
 	}
 	
 	public String getTextElement(WebElement element) {
 		return element.getText();
 	}
 	
-	public String getTextElement(WebDriver driver, String locator) {
-		return getWebElement(driver, locator).getText();
+	public String getTextElement(WebDriver driver, String locatorPattern, String... params) {
+		return getWebElement(driver, locatorPattern, params).getText();
 	}
 	
 	public String getAttributeValue(WebElement element, String attributeName) {
 		return element.getAttribute(attributeName);
 	}
 	
-	public String getAttributeValue(WebDriver driver, String locator, String attributeName) {
-		return getWebElement(driver, locator).getAttribute(attributeName);
+	public String getAttributeValue(WebDriver driver, String locatorPattern, String attributeName, String... params) {
+		return getWebElement(driver, locatorPattern, params).getAttribute(attributeName);
 	}
 	
 	public String getCssValue(WebElement element, String cssAttribute) {
 		return element.getCssValue(cssAttribute);
 	}
 	
-	public String getCssValue(WebDriver driver, String locator, String cssAttribute) {
-		return getWebElement(driver, locator).getCssValue(cssAttribute);
+	public String getCssValue(WebDriver driver, String locatorPattern, String cssAttribute, String... params) {
+		return getWebElement(driver, locatorPattern, params).getCssValue(cssAttribute);
 	}
 	
 	public boolean isWebElementDisplayed(WebElement element) {
@@ -96,16 +121,16 @@ public class BasePage {
 		return element.isEnabled();
 	}
 	
-	public boolean isWebElementDisplayed(WebDriver driver, String locator) {
-		return getWebElement(driver, locator).isDisplayed();
+	public boolean isWebElementDisplayed(WebDriver driver, String locatorPattern, String... params) {
+		return getWebElement(driver, locatorPattern, params).isDisplayed();
 	}
 	
-	public boolean isWebElementSelected(WebDriver driver, String locator) {
-		return getWebElement(driver, locator).isSelected();
+	public boolean isWebElementSelected(WebDriver driver, String locatorPattern, String... params) {
+		return getWebElement(driver, locatorPattern, params).isSelected();
 	}
 	
-	public boolean isWebElementEnabled(WebDriver driver, String locator) {
-		return getWebElement(driver, locator).isEnabled();
+	public boolean isWebElementEnabled(WebDriver driver, String locatorPattern, String... params) {
+		return getWebElement(driver, locatorPattern, params).isEnabled();
 	}
 	
 	public void uncheckTheCheckbox(WebElement element) {
@@ -119,8 +144,8 @@ public class BasePage {
 		cb.selectByVisibleText(item);
 	}
 	
-	public void selectDefaultDropdown(WebDriver driver, String locator, String item) {
-		Select cb = new Select(getWebElement(driver, locator));
+	public void selectDefaultDropdown(WebDriver driver, String locatorPattern, String item) {
+		Select cb = new Select(getWebElement(driver, locatorPattern));
 		cb.selectByVisibleText(item);
 	}
 	
@@ -128,8 +153,8 @@ public class BasePage {
 		element.click();
 	}
 	
-	public void clickToElement(WebDriver driver, String locator) {
-		getWebElement(driver, locator).click();
+	public void clickToElement(WebDriver driver, String locatorPattern,  String... params) {
+		getWebElement(driver, locatorPattern, params).click();
 	}
 	
 	public void sendKeyToElement(WebElement element, String value) {
@@ -137,8 +162,8 @@ public class BasePage {
 		element.sendKeys(value);
 	}
 	
-	public void sendKeyToElement(WebDriver driver, String locator, String value) {
-		WebElement element = getWebElement(driver, locator);
+	public void sendKeyToElement(WebDriver driver, String locatorPattern, String value,  String... params) {
+		WebElement element = getWebElement(driver, locatorPattern, params);
 		element.clear();
 		element.sendKeys(value);
 	}
@@ -151,8 +176,8 @@ public class BasePage {
 		createActionFromDriver(driver).doubleClick(element).perform();
 	}
 	
-	public void dbClickToElement(WebDriver driver, String locator) {
-		WebElement element = getWebElement(driver, locator);
+	public void dbClickToElement(WebDriver driver, String locatorPattern,  String... params) {
+		WebElement element = getWebElement(driver, locatorPattern, params);
 		createActionFromDriver(driver).doubleClick(element).perform();
 	}
 	
@@ -160,8 +185,8 @@ public class BasePage {
 		createActionFromDriver(driver).moveToElement(element).perform();
 	}
 	
-	public void hoverMouseToElement(WebDriver driver, String locator) {
-		WebElement element = getWebElement(driver, locator);
+	public void hoverMouseToElement(WebDriver driver, String locatorPattern, String... params) {
+		WebElement element = getWebElement(driver, locatorPattern, params);
 		createActionFromDriver(driver).moveToElement(element).perform();
 	}
 	
@@ -169,33 +194,33 @@ public class BasePage {
 		createActionFromDriver(driver).contextClick(element).perform();
 	}
 	
-	public void rightClickToElement(WebDriver driver, String locator) {
-		createActionFromDriver(driver).contextClick(getWebElement(driver, locator)).perform();
+	public void rightClickToElement(WebDriver driver, String locatorPattern,  String... params) {
+		createActionFromDriver(driver).contextClick(getWebElement(driver, locatorPattern, params)).perform();
 	}
 	
 	public void dragAndDropToElement(WebDriver driver, WebElement a, WebElement b) {
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
 	}
 	
-	public void dragAndDropToElement(WebDriver driver, String locatorA, String locatorB) {
-		WebElement a = getWebElement(driver, locatorA);
-		WebElement b = getWebElement(driver, locatorB);
+	public void dragAndDropToElement(WebDriver driver, String locatorPatternA, String locatorPatternB, String... params) {
+		WebElement a = getWebElement(driver, locatorPatternA, params);
+		WebElement b = getWebElement(driver, locatorPatternB, params);
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
 	}
 	
 	//common actions
-	public MyAccountObject clickMyAccountLink(WebDriver driver) {
-		clickToElement(driver, CommonUI.MY_ACCOUNT_NAV);
+	public MyAccountObject clickMyAccountLinkOnFooter(WebDriver driver) {
+		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "My account");
 		return PageGeneratorManager.getMyAccountPage(driver);
 	}
 	
-	public SitemapObject clickSitemapLink(WebDriver driver) {
-		clickToElement(driver, CommonUI.SITEMAP_NAV);
+	public SitemapObject clickSitemapLinkOnFooter(WebDriver driver) {
+		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "Sitemap");
 		return PageGeneratorManager.getSitemapPage(driver);
 	}
 	
-	public BlogObject clickBlogLink(WebDriver driver) {
-		clickToElement(driver, CommonUI.BLOG_NAV);
+	public BlogObject clickBlogLinkOnFooter(WebDriver driver) {
+		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "Blog");
 		return PageGeneratorManager.getBlogPage(driver);
 	}
 	

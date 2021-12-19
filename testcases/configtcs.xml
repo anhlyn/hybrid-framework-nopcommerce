@@ -2,11 +2,11 @@
   
 <suite name="Suite" verbose="1" >
 
-  <test name="APPLY PAGE_GENERATOR_MANAGER" >
+  <test name="Apply_Dynamic_Locators" >
   	
   	<parameter name="browser" value="chrome" />  	
     <classes>
-       <class name="com.nopcommerce.user.Level_07_SwitchPage" />
+       <class name="com.nopcommerce.user.Apply_Dynamic_Locators" />
     </classes>
   </test>
   

@@ -2,19 +2,17 @@ package pageUI;
 
 public class CommonUI {
 
-	public static final String REGISTER_TOP_NAV = "//div[@class='header-links']//a[@class='ico-register']";
-	public static final String LOGIN_TOP_NAV = "//div[@class='header-links']//a[@class='ico-login']";
-	public static final String LOGOUT_TOP_NAV = "//div[@class='header-links']//a[@class='ico-logout']";
-	public static final String WISHLIST_TOP_NAV = "//div[@class='header-links']//a[@class='ico-wishlist']";
-	public static final String CART_TOP_NAV = "//div[@class='header-links']//a[@class='ico-cart']";
+	//HEADER LINKS
+	//register/login/logout/wishlist/cart/account
+	public static final String HEADER_LINKS_PATTERN = "xpath=//div[@class='header-links']//a[@class='ico-%s']";
 	
-	public static final String SEARCH_INPUT = "//input[@id='small-searchterms']";
-	public static final String SEARCH_BUTTON = "//form[@id='small-search-box-form']//button";
+	public static final String SEARCH_INPUT = "css=input#small-searchterms"; //"//input[@id='small-searchterms']"
+	public static final String SEARCH_BUTTON = "xpath=//form[@id='small-search-box-form']//button";
 	
-	public static final String PAGE_TITLE = "//div[@class='page-title']//h1";
+	public static final String PAGE_TITLE = "css=div.page-title h1"; //"//div[@class='page-title']//h1"
 	
-	public static final String MY_ACCOUNT_NAV = "//ul[@class='list']//a[text()='My account']";
-	public static final String SITEMAP_NAV = "//ul[@class='list']//a[text()='Sitemap']";
-	public static final String BLOG_NAV = "//ul[@class='list']//a[text()='Blog']";
+	//FOOTER LINKS AND MY ACCOUNT AREA
+	//My account/Sitemap/Blog...
+	public static final String FOOTER_LINKS_PATTERN = "xpath=//ul[@class='list']//a[text()='%s']";
 	
 }

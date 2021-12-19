@@ -12,7 +12,7 @@ public class HomeObject extends BasePage{
 	
 	public HomeObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		pageLoadTimeout(driver, 5000);
+		pageLoadTimeout(driver, 20000);
 	}
 	
 	public void loadHomePage() {
@@ -24,11 +24,11 @@ public class HomeObject extends BasePage{
 	}
 	
 	public void clickLogOutNav() {
-		clickToElement(driver, CommonUI.LOGOUT_TOP_NAV);
+		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "logout");
 	}
 	
 	public void clickRegisterNav() {
-		clickToElement(driver, CommonUI.REGISTER_TOP_NAV);
+		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "register");
 	}
 	
 }
