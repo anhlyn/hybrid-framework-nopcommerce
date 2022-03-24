@@ -1,12 +1,29 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
   
-<suite name="Suite" verbose="1" >
+<suite name="Frontend" verbose="1" >
 
-  <test name="Apply_Dynamic_Locators" >
+  <test name="Login" >
   	
-  	<parameter name="browser" value="chrome" />  	
+  	<parameter name="browser" value="chrome" /> 
     <classes>
-       <class name="com.nopcommerce.user.Apply_Dynamic_Locators" />
+       <class name="com.nopcommerce.frontend.Login" />
+    </classes>
+  </test>
+  
+  <test name="Register" >
+  	
+  	<parameter name="browser" value="chrome" /> 
+    <classes>
+       <class name="com.nopcommerce.frontend.Register" />
+    </classes>
+  </test>
+  
+   <test name="MyACcount" >
+  	
+  	<parameter name="browser" value="chrome" /> 
+  	<parameter name="product_add_review" value="Fahrenheit 451 by Ray Bradbury" /> 	
+    <classes>
+       <class name="com.nopcommerce.frontend.MyAccount" />
     </classes>
   </test>
   

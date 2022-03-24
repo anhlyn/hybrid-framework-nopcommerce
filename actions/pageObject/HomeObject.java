@@ -12,23 +12,15 @@ public class HomeObject extends BasePage{
 	
 	public HomeObject(WebDriver mappingDriver) {
 		driver = mappingDriver;
-		pageLoadTimeout(driver, 20000);
+		pageLoadTimeout(driver, 30000);
 	}
 	
-	public void loadHomePage() {
+	public void open() {
 		openPageUrl(driver, GlobalContants.URL);
 	}
 	
 	public String getH1Title() {
 		return getTextElement(driver, CommonUI.PAGE_TITLE);
-	}
-	
-	public void clickLogOutNav() {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "logout");
-	}
-	
-	public void clickRegisterNav() {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "register");
 	}
 	
 }

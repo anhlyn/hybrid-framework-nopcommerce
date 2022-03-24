@@ -1,7 +1,10 @@
 package commons;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,10 +17,20 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
 	
-	protected String generateRandomNumber() {
+	protected Log log;
+	
+	protected BaseTest() {
+		log = LogFactory.getLog(this.getClass());
+	}
+	
+	protected int generateRandomNumber() {
 		Random rand = new Random();
-		int randomInt = rand.nextInt(1000);
-		return "test" + randomInt + "@gmail.com";
+		return rand.nextInt(1000);
+	}
+	
+	protected void closeBrowser(WebDriver d) {
+		//d.close();
+		d.quit();
 	}
 	
 	protected WebDriver getBrowserDriver(String browserStr) {
@@ -94,6 +107,9 @@ public class BaseTest {
 				result = new FirefoxDriver(ffOption);
 				break;
 		}
+		result.manage().window().maximize();
+		result.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		result.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return result;
 	}
 

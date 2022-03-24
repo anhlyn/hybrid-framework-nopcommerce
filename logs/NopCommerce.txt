@@ -1,0 +1,122 @@
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:09,803] Login_01_Empty_Data
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:09,804] - Step 01: Open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:09,804] 
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:11,948] - Step 02: Click Login link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:12,648] - Step 03: Click button Login
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:12,842] Login_02_Invalid_Email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:12,843] - Step 01: Open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:13,447] - Step 02: Click login link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:14,050] - Step 03: fill invalid email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:14,288] - Step 04: type password textbox
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:14,478] - Step 05: click login button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:14,643] Login_03_Not_Registered_Email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:14,644] - Step 01: open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:15,166] - Step 02: click login link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:16,063] - Step 03: fill unregistered email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:16,255] - Step 04: type password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:16,400] - Step 05: click Login button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:17,084] Pre_Condition_Register
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:17,084] - Step 01: open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:17,666] - Step 02: click register link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:18,366] - Step 03: Generate new email human_758@gmail.com
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:18,366] - Step 04: Type first name textbox
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:18,559] - Step 05: Type last name textbox
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:18,732] - Step 06: Type email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:18,910] - Step 07: Type password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:19,061] - Step 08: Type confirmed password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:19,228] Click register button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:20,606] - Step 09: logout after register successfully
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:21,622] Login_04_Empty_Password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:21,622] - Step 01: open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:22,151] - Step 02: click login on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:22,759] - Step 03: fill new registered email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:22,954] - Step 04: click login button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:23,591] Login_05_Wrong_Password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:23,592] - Step 01: open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:24,086] - Step 02: click login link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:24,629] - Step 03: type email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:24,844] - Step 04: type password
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:25,006] - Step 05: click login button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:25,669] Login_06_Success
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:25,669] - Step 01: open homepage
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:26,196] - Step 02: click login link on header
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:26,753] - Step 03: type email
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:26,957] - Step 04: type pass
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:27,142] - Step 05: click login button
+[com.nopcommerce.frontend.Login]-[main] [INFO] [2022-03-24 19:50:28,169] AfterClass: close browser
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:31,887] Register_01_Empty_Data
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:31,887] - Step 1: open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:34,054] - Step 2: click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:34,795] - Step 3: click register button
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:35,118] Register_02_Invalid_Email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:35,118] - Step 1: open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:35,699] - Step 2: click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:36,313] - Step 3: type firstname
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:36,591] - Step 4: type lastname
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:36,770] - Step 5: type email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:36,950] - Step 6: type password
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:37,218] - Step 7: type confirmed pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:37,368] - Step 8: click register btn
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:37,568] TC: Register_03_Success
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:37,568] open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:38,229] click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:38,861] generate new email: human_181@gmail.com
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:38,861] type firstname
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:39,038] type lastname
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:39,227] type email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:39,474] type pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:39,694] type confirmed pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:39,849] click register button
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:40,992] click logout link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:41,963] TC: Register_06_ConfirmPass_NotMatch
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:41,963] open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:42,534] click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:43,198] type first name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:43,386] type last name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:43,598] type email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:43,790] type password
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:43,935] type confirmed pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:44,082] click register button
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:44,415] TC: Register_05_Less_6_Characters
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:44,415] open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:44,996] click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:45,598] type first name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:45,795] type last name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:45,977] type email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:46,177] type pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:46,333] type confirmed pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:46,513] click register button
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:46,674] TC: Register_04_Existed_Email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:46,674] open homepage
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:47,340] click register link on header
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:47,967] type first name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:48,145] type last name
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:48,320] type email
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:48,516] type pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:48,716] type confirmed pass
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:48,857] click register
+[com.nopcommerce.frontend.Register]-[main] [INFO] [2022-03-24 19:50:49,531] close browser
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:53,445] Open homepage
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:55,498] Click register link on header
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:56,277] Generate new email name : human_384@gmail.com
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:56,278] Type first name textbox: first name
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:56,591] Type last name textbox: last name
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:56,917] Type email textbox: human_384@gmail.com
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:57,136] Type password textbox: 123456
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:57,289] Type confirm password textbox: 123456
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:57,477] Click register button
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:58,564] Verify your registration...
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:58,609] Click logout link on header.
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:50:59,532] @BeforeMethod: login()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:02,004] TC: MyAccount_03_Change_Password
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:11,808] @AfterMethod: logout()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:12,811] @BeforeMethod: login()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:14,760] TC: MyAccount_04_Add_Review
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:24,863] @AfterMethod: logout()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:25,962] @BeforeMethod: login()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:27,963] TC: MyAccount_O1_Update_Info
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:32,216] @AfterMethod: logout()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:33,318] @BeforeMethod: login()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:35,582] TC: MyAccount_O2_Add_Address
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:46,211] @AfterMethod: logout()
+[com.nopcommerce.frontend.MyAccount]-[main] [INFO] [2022-03-24 19:51:47,301] @AfterClass: close browser
