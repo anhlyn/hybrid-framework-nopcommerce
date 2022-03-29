@@ -34,7 +34,7 @@ public class Login extends BaseTest{
 		loginPage = new LoginObject(d);
 		registerPage = new RegisterObject(d);
 	}
-	
+
 	@Test
 	public void Login_01_Empty_Data() {
 		log.info("Login_01_Empty_Data");

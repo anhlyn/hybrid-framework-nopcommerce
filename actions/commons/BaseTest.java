@@ -20,7 +20,8 @@ public class BaseTest {
 	protected Log log;
 	
 	protected BaseTest() {
-		log = LogFactory.getLog(this.getClass());
+		log = LogFactory.getLog(getClass());
+	
 	}
 	
 	protected int generateRandomNumber() {
