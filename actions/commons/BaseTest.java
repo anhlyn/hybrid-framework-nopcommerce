@@ -20,6 +20,7 @@ public class BaseTest {
 	protected Log log;
 	
 	protected BaseTest() {
+		
 		log = LogFactory.getLog(getClass());
 	
 	}

@@ -2,28 +2,17 @@
   
 <suite name="Frontend" verbose="1" >
 
+  <listeners>
+      <!--<listener class-name="reportConfig.ExtentReportListenerV2" />-->
+      <listener class-name="org.uncommons.reportng.HTMLReporter" />
+      <listener class-name="com.nopcommerce.frontend.TestListener" />
+  </listeners>
+
   <test name="Login" >
   	
   	<parameter name="browser" value="chrome" /> 
     <classes>
-       <class name="com.nopcommerce.frontend.Login" />
-    </classes>
-  </test>
-  
-  <test name="Register" >
-  	
-  	<parameter name="browser" value="chrome" /> 
-    <classes>
-       <class name="com.nopcommerce.frontend.Register" />
-    </classes>
-  </test>
-  
-   <test name="MyACcount" >
-  	
-  	<parameter name="browser" value="chrome" /> 
-  	<parameter name="product_add_review" value="Fahrenheit 451 by Ray Bradbury" /> 	
-    <classes>
-       <class name="com.nopcommerce.frontend.MyAccount" />
+        <class name="com.nopcommerce.frontend.Login" />
     </classes>
   </test>
   
