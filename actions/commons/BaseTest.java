@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.AfterSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,8 +32,7 @@ public class BaseTest {
 		return rand.nextInt(1000);
 	}
 	
-	protected void closeBrowser(WebDriver d) {
-		//d.close();
+	protected void quitBrowser(WebDriver d) {
 		d.quit();
 	}
 	
@@ -113,6 +114,22 @@ public class BaseTest {
 		result.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 		result.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return result;
+	}
+	
+	@AfterSuite(enabled=true)
+	protected void deleteAllBrowserDriverThreads() {
+		System.out.println("-------- execute @AfterSuite");
+		String osName = System.getProperty("os.name");
+		System.out.println("OS NAME IS " + osName);
+		if(osName.toLowerCase().startsWith("mac")) {
+			try {
+				Runtime.getRuntime().exec("pkill chromedriver");
+				System.out.println("after execute 'pkill chromedriver' on mac os.");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

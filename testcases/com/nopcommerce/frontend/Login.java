@@ -201,10 +201,9 @@ public class Login extends BaseTest{
 		Assert.assertTrue(loginPage.isLoginSuccess());
 	}
 	
-	@AfterClass
-	public void afterClass() {
-		Reporter.log("AfterClass: close browser");
-		closeBrowser(d);
-	}
+	 @AfterClass
+	  public void quitCurrentOpenedBrowser() {
+		  this.quitBrowser(d);
+	  }
 	
 }

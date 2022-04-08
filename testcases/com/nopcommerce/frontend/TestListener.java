@@ -1,19 +1,15 @@
 package com.nopcommerce.frontend;
 
 import java.io.File;
-import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.testng.IClass;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
-
-import commons.BaseTest;
 
 public class TestListener implements ITestListener {
 
@@ -39,11 +35,11 @@ public class TestListener implements ITestListener {
 		WebDriver d = null;
 		try {
 			d = (WebDriver)result.getTestClass().getRealClass().getDeclaredField("d").get(result.getInstance());
-			Object obj = result.getInstance();
+			/*Object obj = result.getInstance();
 			Set<String> attrs = result.getAttributeNames();
 			String hostStr = result.getHost();
 			String instanceName = result.getInstanceName();
-			IClass testcls = result.getTestClass();
+			IClass testcls = result.getTestClass();*/
 			
 		} catch (IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
