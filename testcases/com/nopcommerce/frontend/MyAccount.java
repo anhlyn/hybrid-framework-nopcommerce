@@ -256,7 +256,7 @@ public class MyAccount extends BaseTest{
 	@AfterClass
 	public void afterClass() {
 		log.info("@AfterClass: close browser");
-		closeBrowser(d);
+		quitBrowser(d);
 	}
 	
 }

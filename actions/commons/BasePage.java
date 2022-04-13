@@ -6,21 +6,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
 import org.openqa.selenium.support.ui.Select;
 
-import pageObject.BlogObject;
-import pageObject.ChangePasswordObject;
-import pageObject.HomeObject;
-import pageObject.LoginObject;
-import pageObject.MyAccountObject;
-import pageObject.MyAddressObject;
-import pageObject.MyReviewObject;
 import pageObject.RegisterObject;
-import pageObject.SitemapObject;
 import pageUI.CommonUI;
+import pageUI.PatternUI;
 
 public class BasePage {
 	
@@ -64,48 +56,12 @@ public class BasePage {
 		driver.manage().timeouts().pageLoadTimeout(x, TimeUnit.MILLISECONDS);
 	}
 	
-	private WebElement getWebElement(WebDriver driver, String locatorPattern, String... params) {
-		
-		String replacedLocator = String.format(locatorPattern, (Object[])params);
-		String lowerCaseLocatorPattern = replacedLocator.toLowerCase();
-		
-		By byObject = null;
-		//Only use 5 locator types: id/name/class/css/xpath
-		if(lowerCaseLocatorPattern.startsWith("id")) {
-			byObject = By.id(replacedLocator.substring(3));
-		}else if(lowerCaseLocatorPattern.startsWith("name")) {
-			byObject = By.name(replacedLocator.substring(5));
-		}else if(lowerCaseLocatorPattern.startsWith("class")) {
-			byObject = By.className(replacedLocator.substring(6));
-		}else if(lowerCaseLocatorPattern.startsWith("css")) {
-			byObject = By.cssSelector(replacedLocator.substring(4));
-		}else if(lowerCaseLocatorPattern.startsWith("xpath")) {
-			byObject = By.xpath(replacedLocator.substring(6));
-		}
-		
-		return driver.findElement(byObject);
+	private WebElement getWebElement(WebDriver driver, String locatorPattern, String... params) {		
+		return driver.findElement(By.xpath(String.format(locatorPattern, (Object[])params)));	
 	}
 	
 	protected List<WebElement> getWebElements(WebDriver driver, String locatorPattern, String... params) {
-		
-		String replacedLocator = String.format(locatorPattern, (Object[])params);
-		String lowerCaseLocatorPattern = replacedLocator.toLowerCase();
-		
-		By byObject = null;
-		//Only use 5 locator types: id/name/class/css/xpath
-		if(lowerCaseLocatorPattern.startsWith("id")) {
-			byObject = By.id(replacedLocator.substring(3));
-		}else if(lowerCaseLocatorPattern.startsWith("name")) {
-			byObject = By.name(replacedLocator.substring(5));
-		}else if(lowerCaseLocatorPattern.startsWith("class")) {
-			byObject = By.className(replacedLocator.substring(6));
-		}else if(lowerCaseLocatorPattern.startsWith("css")) {
-			byObject = By.cssSelector(replacedLocator.substring(4));
-		}else if(lowerCaseLocatorPattern.startsWith("xpath")) {
-			byObject = By.xpath(replacedLocator.substring(6));
-		}
-		
-		return driver.findElements(byObject);
+		return driver.findElements(By.xpath(String.format(locatorPattern, (Object[])params)));
 	}
 	
 	public List<String> getTextElements(WebDriver driver, String locatorPattern, String...params) {
@@ -176,8 +132,8 @@ public class BasePage {
 		cb.selectByVisibleText(item);
 	}
 	
-	public void selectDefaultDropdown(WebDriver driver, String locatorPattern, String item) {
-		Select cb = new Select(getWebElement(driver, locatorPattern));
+	public void selectDefaultDropdown(WebDriver driver, String item, String locatorPattern, String... params) {
+		Select cb = new Select(getWebElement(driver, locatorPattern, params));
 		cb.selectByVisibleText(item);
 	}
 	
@@ -245,57 +201,41 @@ public class BasePage {
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
 	}
 	
-	//FOOTER
-	public MyAccountObject clickMyAccountLinkOnFooter(WebDriver driver) {
-		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "My account");
-		return PageGeneratorManager.getMyAccountPage(driver);
+	//click menu
+	public Object clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
+		clickToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
+		if(attrText.toLowerCase().contains("register")) {
+			return PageGeneratorManager.getRegisterPage(driver);
+		}
+		return new Object();
 	}
 	
-	public SitemapObject clickSitemapLinkOnFooter(WebDriver driver) {
-		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "Sitemap");
-		return PageGeneratorManager.getSitemapPage(driver);
+	//
+	public void typeInputById(WebDriver driver, String id, String text) {
+		sendKeyToElement(driver, PatternUI.INPUT_BY_ID, text, id);
 	}
 	
-	public BlogObject clickBlogLinkOnFooter(WebDriver driver) {
-		clickToElement(driver, CommonUI.FOOTER_LINKS_PATTERN, "Blog");
-		return PageGeneratorManager.getBlogPage(driver);
+	public void typeInputByName(WebDriver driver, String name, String text) {
+		sendKeyToElement(driver, PatternUI.INPUT_BY_NAME, text, name);
 	}
 	
-	//HEADER
-	public MyAccountObject clickMyAccountLinkOnHeader(WebDriver driver) {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "account");
-		return PageGeneratorManager.getMyAccountPage(driver);
+	public void selectItemFromDropdownByName(WebDriver driver, String name, String item) {
+		selectDefaultDropdown(driver, item, PatternUI.SEL_BY_NAME, name);
 	}
 	
-	public RegisterObject clickRegisterLinkOnHeader(WebDriver driver) {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "register");
-		return PageGeneratorManager.getRegisterPage(driver);
+	public String getFieldValidationError(WebDriver driver, String containedID) {
+		return getTextElement(driver, PatternUI.SPAN_ERROR_BY_ID, containedID);
 	}
 	
-	public HomeObject clickLogoutOnHeader(WebDriver driver) {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "logout");
-		return PageGeneratorManager.getHomePage(driver);
+	public void clickButtonByClassAndText(WebDriver driver, String attrClass, String attrText) {
+		clickToElement(driver, PatternUI.BUTTON_BY_CLASS_AND_TEXT, attrClass, attrText);
 	}
 	
-	public LoginObject clickLoginOnHeader(WebDriver driver) {
-		clickToElement(driver, CommonUI.HEADER_LINKS_PATTERN, "login");
-		return PageGeneratorManager.getLoginPage(driver);
+	public String getResultMsg(WebDriver driver) {
+		return getTextElement(driver, CommonUI.RESULT_MSG);
 	}
 	
-	//SIDEBAR
-	public MyAddressObject clickMyAddressesOnSidebar(WebDriver driver) {
-		clickToElement(driver, CommonUI.SIDEBAR_ADDRESSES);
-		return PageGeneratorManager.getMyAddressPage(driver);
+	public String getSummaryErrMsg(WebDriver driver) {
+		return getTextElement(driver, CommonUI.SUMMARY_ERR_MSG);
 	}
-	
-	public ChangePasswordObject clickChangePasswordOnSidebar(WebDriver driver) {
-		clickToElement(driver, CommonUI.SIDEBAR_CHANGEPASS);
-		return PageGeneratorManager.getChangePasswordPage(driver);
-	}
-	
-	public MyReviewObject clickMyReviewOnSidebar(WebDriver driver) {
-		clickToElement(driver, CommonUI.SIDEBAR_MYREVIEW);
-		return PageGeneratorManager.getMyReviewPage(driver);
-	}
-	
 }

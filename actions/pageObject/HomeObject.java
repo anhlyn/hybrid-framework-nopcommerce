@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.GlobalContants;
-import pageUI.CommonUI;
+import pageUI.HomeUI;
 
 public class HomeObject extends BasePage{
 	
@@ -15,12 +15,12 @@ public class HomeObject extends BasePage{
 		pageLoadTimeout(driver, 30000);
 	}
 	
-	public void open() {
+	public void openHomepage() {
 		openPageUrl(driver, GlobalContants.URL);
 	}
 	
-	public String getH1Title() {
-		return getTextElement(driver, CommonUI.PAGE_TITLE);
+	public boolean isSliderExists() {
+		return isWebElementDisplayed(driver, HomeUI.NIVO_SLIDER);
 	}
 	
 }

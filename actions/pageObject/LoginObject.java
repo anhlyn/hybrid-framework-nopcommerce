@@ -3,7 +3,7 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.CommonUI;
+import pageUI.PatternUI;
 import pageUI.LoginUI;
 
 public class LoginObject extends BasePage{
@@ -35,7 +35,7 @@ public class LoginObject extends BasePage{
 	}
 	
 	public boolean isLoginSuccess() {
-		return isWebElementDisplayed(driver, CommonUI.HEADER_LINKS_PATTERN, "logout");
+		return isWebElementDisplayed(driver, PatternUI.HEADER_LINKS_PATTERN, "logout");
 	}
 	
 }

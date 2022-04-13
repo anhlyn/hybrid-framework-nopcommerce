@@ -116,7 +116,7 @@ public class BaseTest {
 		return result;
 	}
 	
-	@AfterSuite(enabled=true)
+	@AfterSuite(enabled=true, alwaysRun=true)
 	protected void deleteAllBrowserDriverThreads() {
 		System.out.println("-------- execute @AfterSuite");
 		String osName = System.getProperty("os.name");
@@ -126,7 +126,6 @@ public class BaseTest {
 				Runtime.getRuntime().exec("pkill chromedriver");
 				System.out.println("after execute 'pkill chromedriver' on mac os.");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
