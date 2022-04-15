@@ -4,14 +4,17 @@ package com.nopcommerce.frontend;
 //import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.github.javafaker.Faker;
+
 import commons.BaseTest;
+import commons.EnContanst;
+import commons.Helper;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
 import pageObject.RegisterObject;
@@ -20,190 +23,165 @@ import pageObject.RegisterObject;
 public class Login extends BaseTest{
 	
 	WebDriver d;
+	private Helper helper;
+	private Faker dataFaker;
 	
-	private HomeObject homePage;
-	private LoginObject loginPage;
-	private RegisterObject registerPage;
-	
-	private String newEmail = "";
+	private String email, password;
 	
 	@Parameters("browser")
 	@BeforeClass
 	public void preCondition(@Optional("chrome") String b) {		
 		d = getBrowserDriver(b);	
+		helper = Helper.getHelper();
+		dataFaker = new Faker();
+		email = dataFaker.bothify("????###@gmail.com");
+		password = dataFaker.bothify("???###");
+		System.out.println("email: " + email + " | pass: " + password);
 		
-		//khoi tao pages
 		homePage = new HomeObject(d);
 		loginPage = new LoginObject(d);
 		registerPage = new RegisterObject(d);
 	}
+	
+	@Test(enabled=true)
+	public void Register_New_Account() {
+		
+		log.info("TC: Register_03_Success");
+		
+		log.info("open homepage");
+		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		log.info("click register link on header");
+		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		registerPage.FillInformationOnRegisterForm(dataFaker.name().firstName(), dataFaker.name().lastName(), email, password, password);
+		
+		log.info("- verify register is successful.");
+		Assert.assertEquals(helper.getResultMsg(d), EnContanst.MSG_REG_SUCCESS);
+		
+		log.info("click logout link on header");
+		helper.clickAnchorByClassAndText(d, "header-links", "Log out");
+		log.info("verify after logout successfully and then redirect to homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+	}
 
-	@Test
+	@Test(enabled=true)
 	public void Login_01_Empty_Data() {
-		Reporter.log("Login_01_Empty_Data", true);
-		Reporter.log("- Step 01: Open homepage", true);
-		System.setProperty("org.uncommons.reportng.escape-output", "false");
-		Reporter.log("<h1>Report.log here ... </h1>");
-		//step 1: open homepage
-		homePage.open();
-		Reporter.log("- Step 02: Click Login link on header", true);
-		//step 2: click Login link on header
-		loginPage.clickLoginOnHeader(d);
-		Reporter.log("- Step 03: Click button Login", true);
-		//step 3: click btn login
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertEquals(loginPage.getEmailErrMsg(), "Please enter your email 1");	
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
+		
+		loginPage.FillInfoAndClickLoginBtn("", "");
+		
+		log.info("Verify login with empty data.");
+		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_EMAIL);	
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void Login_02_Invalid_Email() {
-		//Reporter.log("Login_02_Invalid_Email");
-		//Reporter.log("- Step 01: Open homepage");
-		//step 1: open homepage
-		homePage.open();
-		//Reporter.log("- Step 02: Click login link on header");
-		//step 2: click login link on header
-		loginPage.clickLoginOnHeader(d);
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		//Reporter.log("- Step 03: fill invalid email");
-		//step 3: fill invalid email
-		loginPage.typeEmailTxt("test@123@456");
-		//Reporter.log("- Step 04: type password textbox");
-		loginPage.typePasswordTxt("123456");
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
-		//Reporter.log("- Step 05: click login button");
-		//step 4: click login button
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertEquals(loginPage.getEmailErrMsg(), "Wrong email");
+		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????##@???@??##"), password);
+		
+		log.info("Verify after login with invalid email.");
+		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_WRONG_EMAIL);
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void Login_03_Not_Registered_Email() {
-		Reporter.log("Login_03_Not_Registered_Email");
-		Reporter.log("- Step 01: open homepage");
-		homePage.open();
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 
-		Reporter.log("- Step 02: click login link on header");
-		loginPage.clickLoginOnHeader(d);
-	
-		Reporter.log("- Step 03: fill unregistered email");
-		loginPage.typeEmailTxt("test" + generateRandomNumber() + "@gmail.com");
+		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????###@????.com"), password);
 		
-		Reporter.log("- Step 04: type password");
-		loginPage.typePasswordTxt("123456");
-	
-		Reporter.log("- Step 05: click Login button");
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertTrue(loginPage.getSummaryErrMsg().contains("No customer account found"));
+		log.info("Verify login with not registered email.");
+		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_NOT_REGISTERED_EMAIL));
 	}
 	
-	@Test(enabled=false)
-	public void Pre_Condition_Register() {
-		
-		Reporter.log("Pre_Condition_Register");
-	
-		Reporter.log("- Step 01: open homepage");
-		homePage.open();
-	
-		Reporter.log("- Step 02: click register link on header");
-		registerPage = registerPage.clickRegisterLinkOnHeader(d);
-	
-		String em = "human_" + generateRandomNumber() + "@gmail.com";
-		Reporter.log("- Step 03: Generate new email " + em);
-		
-		Reporter.log("- Step 04: Type first name textbox");
-		registerPage.typeFirstnameTxt("first name");
-		
-		Reporter.log("- Step 05: Type last name textbox");
-		registerPage.typeLastnameTxt("last name");
-		
-		Reporter.log("- Step 06: Type email");
-		registerPage.typeEmailTxt(em);
-		
-		Reporter.log("- Step 07: Type password");
-		registerPage.typePasswordTxt("123456");
-		
-		Reporter.log("- Step 08: Type confirmed password");
-		registerPage.typeCPasswordTxt("123456");
-		
-		Reporter.log("Click register button");
-		registerPage.clickRegisterBtn();
-		//Verify
-		Assert.assertEquals(registerPage.getSuccessMsg(), "Your registration completed");
-		this.newEmail = em;
-		
-		Reporter.log("- Step 09: logout after register successfully");
-		registerPage.clickLogoutOnHeader(d);
-	}
-	
-	@Test(enabled=false, dependsOnMethods = "Pre_Condition_Register")
+	@Test(enabled=true, dependsOnMethods = "Register_New_Account")
 	public void Login_04_Empty_Password() {
-		Reporter.log("Login_04_Empty_Password");
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		Reporter.log("- Step 01: open homepage");
-		homePage.open();
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
-		Reporter.log("- Step 02: click login on header");
-		loginPage.clickLoginOnHeader(d);
-
-		Reporter.log("- Step 03: fill new registered email");
-		loginPage.typeEmailTxt(this.newEmail);
-	
-		Reporter.log("- Step 04: click login button");
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertTrue(loginPage.getSummaryErrMsg().contains("The credentials provided are incorrect"));
+		loginPage.FillInfoAndClickLoginBtn(email, "");
+		
+		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
 	}
 	
-	@Test(enabled = false, dependsOnMethods = "Pre_Condition_Register")
+	@Test(enabled = true, dependsOnMethods = "Register_New_Account")
 	public void Login_05_Wrong_Password() {
-		Reporter.log("Login_05_Wrong_Password");
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		Reporter.log("- Step 01: open homepage");
-		homePage.open();
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
-		Reporter.log("- Step 02: click login link on header");
-		loginPage.clickLoginOnHeader(d);
+		loginPage.FillInfoAndClickLoginBtn(email, dataFaker.bothify("????####"));
 		
-		Reporter.log("- Step 03: type email");
-		loginPage.typeEmailTxt(newEmail);
-		
-		Reporter.log("- Step 04: type password");
-		loginPage.typePasswordTxt("12345678");
-		
-		Reporter.log("- Step 05: click login button");
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertTrue(loginPage.getSummaryErrMsg().contains("The credentials provided are incorrect"));
+		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
+
 	}
 	
-	@Test(enabled = false, dependsOnMethods = "Pre_Condition_Register")
+	@Test(enabled = true, dependsOnMethods = "Register_New_Account")
 	public void Login_06_Success() {
-		Reporter.log("Login_06_Success");
-		Reporter.log("- Step 01: open homepage");
-		homePage.open();
+		log.info("Login_01_Empty_Data");
+		log.info("- Step 1: open homepage");
+		homePage.openHomepage();
+		log.info("Verify open homepage successfully.");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		Reporter.log("- Step 02: click login link on header");
-		loginPage.clickLoginOnHeader(d);
+		log.info("click login link on header");
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
-		Reporter.log("- Step 03: type email");
-		loginPage.typeEmailTxt(newEmail);
+		loginPage.FillInfoAndClickLoginBtn(email, password);
+		System.out.println("email: " + email + " | pass: " + password);
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		Assert.assertTrue(helper.isLoginSuccessful(this.d));
 		
-		Reporter.log("- Step 04: type pass");
-		loginPage.typePasswordTxt("123456");
-		
-		Reporter.log("- Step 05: click login button");
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertTrue(loginPage.isLoginSuccess());
 	}
 	
-	 @AfterClass
-	  public void quitCurrentOpenedBrowser() {
-		  this.quitBrowser(d);
-	  }
+	 @AfterClass(enabled=true, alwaysRun=true)
+	 public void afterClass() {
+		log.info("close browser");
+		quitBrowser(d);
+	}
+	 
+	private HomeObject homePage;
+	private LoginObject loginPage;
+	private RegisterObject registerPage;
 	
 }

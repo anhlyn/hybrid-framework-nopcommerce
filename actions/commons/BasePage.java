@@ -10,9 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import pageUI.CommonUI;
-import pageUI.PatternUI;
-
 public class BasePage {
 	
 	public void openPageUrl(WebDriver driver, String url) {
@@ -25,26 +22,6 @@ public class BasePage {
 	
 	public void quitBrowsers(WebDriver driver) {
 		driver.quit();
-	}
-	
-	public String getCurrentPageUrl(WebDriver driver) {
-		return driver.getCurrentUrl();
-	}
-	
-	public String getPageSource(WebDriver driver) {
-		return driver.getPageSource();
-	}
-	
-	public void back(WebDriver driver) {
-		driver.navigate().back();
-	}
-	
-	public void forward(WebDriver driver) {
-		driver.navigate().forward();
-	}
-	
-	public void refresh(WebDriver driver) {
-		driver.navigate().refresh();
 	}
 	
 	public void pageLoadTimeout(WebDriver driver, int x) {
@@ -196,41 +173,4 @@ public class BasePage {
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
 	}
 	
-	//click menu
-	public Object clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
-		clickToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
-		if(attrText.toLowerCase().contains("register")) {
-			return PageGeneratorManager.getRegisterPage(driver);
-		}
-		return new Object();
-	}
-	
-	//
-	public void typeInputById(WebDriver driver, String id, String text) {
-		sendKeyToElement(driver, PatternUI.INPUT_BY_ID, text, id);
-	}
-	
-	public void typeInputByName(WebDriver driver, String name, String text) {
-		sendKeyToElement(driver, PatternUI.INPUT_BY_NAME, text, name);
-	}
-	
-	public void selectItemFromDropdownByName(WebDriver driver, String name, String item) {
-		selectDefaultDropdown(driver, item, PatternUI.SEL_BY_NAME, name);
-	}
-	
-	public String getFieldValidationError(WebDriver driver, String containedID) {
-		return getTextElement(driver, PatternUI.SPAN_ERROR_BY_ID, containedID);
-	}
-	
-	public void clickButtonByClassAndText(WebDriver driver, String attrClass, String attrText) {
-		clickToElement(driver, PatternUI.BUTTON_BY_CLASS_AND_TEXT, attrClass, attrText);
-	}
-	
-	public String getResultMsg(WebDriver driver) {
-		return getTextElement(driver, CommonUI.RESULT_MSG);
-	}
-	
-	public String getSummaryErrMsg(WebDriver driver) {
-		return getTextElement(driver, CommonUI.SUMMARY_ERR_MSG);
-	}
 }

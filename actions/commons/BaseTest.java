@@ -37,7 +37,6 @@ public class BaseTest {
 	}
 	
 	protected WebDriver getBrowserDriver(String browserStr) {
-		String userdir = System.getProperty("user.dir");
 		String driverPath = "";
 		WebDriver result = null;
 		ChromeOptions options = new ChromeOptions();
@@ -47,8 +46,6 @@ public class BaseTest {
 				//driverPath = userdir + "/browserDrivers/chromedriver96";
 				//System.setProperty("webdriver.chrome.driver", driverPath);
 				WebDriverManager.chromedriver().setup();
-				System.out.println("getDownloadedDriverPath: " + WebDriverManager.chromedriver().getDownloadedDriverPath());
-				System.out.println("getDownloadedDriverVersion: " + WebDriverManager.chromedriver().getDownloadedDriverVersion());
 				result = new ChromeDriver();
 				break;
 			case "firefox":
@@ -56,8 +53,6 @@ public class BaseTest {
 				//driverPath = userdir + "/browserDrivers/geckodriver";
 				//System.setProperty("webdriver.gecko.driver", driverPath);
 				WebDriverManager.firefoxdriver().setup();
-				System.out.println("getDownloadedDriverPath: " + WebDriverManager.firefoxdriver().getDownloadedDriverPath());
-				System.out.println("getDownloadedDriverVersion: " + WebDriverManager.firefoxdriver().getDownloadedDriverVersion());
 				result = new FirefoxDriver();
 				break;
 			case "edge":
@@ -65,8 +60,6 @@ public class BaseTest {
 				//driverPath = userdir + "/browserDrivers/msedgedriver";
 				//System.setProperty("webdriver.edge.driver", driverPath);
 				WebDriverManager.edgedriver().setup();
-				System.out.println("getDownloadedDriverPath: " + WebDriverManager.edgedriver().getDownloadedDriverPath());
-				System.out.println("getDownloadedDriverVersion: " + WebDriverManager.edgedriver().getDownloadedDriverVersion());
 				result = new EdgeDriver();
 				break;
 			case "safari":
@@ -74,7 +67,7 @@ public class BaseTest {
 				break;	
 			case "brave":
 				//KO CHAY DUOC
-				driverPath = userdir + "/browserDrivers/chromedriver91";
+				driverPath = GlobalContants.PROJECT_PATH + "/browserDrivers/chromedriver91";
 				System.setProperty("webdriver.chrome.driver", driverPath);
 				options.setBinary("/Applications/Brave.app");
 				result = new ChromeDriver(options);
@@ -82,7 +75,7 @@ public class BaseTest {
 			case "coccoc":
 				//KO CHAY DUOC
 				System.out.println("Run on Coccoc");
-				driverPath = userdir + "/browserDrivers/chromedriver94";
+				driverPath = GlobalContants.PROJECT_PATH + "/browserDrivers/chromedriver94";
 				System.setProperty("webdriver.chrome.driver", driverPath);
 				options.setBinary("/Applications/coccoc.app");
 				System.out.println("set binary OK");
@@ -93,8 +86,6 @@ public class BaseTest {
 				//driverPath = userdir + "/browserDrivers/chromedriver95";
 				//System.setProperty("webdriver.chrome.driver", driverPath);
 				WebDriverManager.chromedriver().setup();
-				System.out.println("getDownloadedDriverPath: " + WebDriverManager.chromedriver().getDownloadedDriverPath());
-				System.out.println("getDownloadedDriverVersion: " + WebDriverManager.chromedriver().getDownloadedDriverVersion());
 				options.setHeadless(true);
 				result = new ChromeDriver(options);
 				break;
@@ -103,8 +94,6 @@ public class BaseTest {
 				//driverPath = userdir + "/browserDrivers/geckodriver";
 				//System.setProperty("webdriver.gecko.driver", driverPath);
 				WebDriverManager.firefoxdriver().setup();
-				System.out.println("getDownloadedDriverPath: " + WebDriverManager.firefoxdriver().getDownloadedDriverPath());
-				System.out.println("getDownloadedDriverVersion: " + WebDriverManager.firefoxdriver().getDownloadedDriverVersion());
 				FirefoxOptions ffOption = new FirefoxOptions();
 				ffOption.setHeadless(true);
 				result = new FirefoxDriver(ffOption);

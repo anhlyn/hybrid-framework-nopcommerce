@@ -12,7 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import commons.BaseTest;
-import commons.PageGeneratorManager;
+import commons.PageGenerator;
 import pageObject.ChangePasswordObject;
 import pageObject.DetailProductObject;
 import pageObject.HomeObject;
@@ -46,15 +46,15 @@ public class MyAccount extends BaseTest{
 		d = getBrowserDriver(b);	
 		
 		//khoi tao pages
-		homePage = PageGeneratorManager.getHomePage(d);
-		loginPage = PageGeneratorManager.getLoginPage(d);
-		registerPage = PageGeneratorManager.getRegisterPage(d);
-		myaccountPage = PageGeneratorManager.getMyAccountPage(d);
-		addressPage = PageGeneratorManager.getMyAddressPage(d);
-		changepassPage = PageGeneratorManager.getChangePasswordPage(d);
-		searchPage = PageGeneratorManager.getSearchPage(d);
-		detailPage = PageGeneratorManager.getDetailPage(d);
-		myreviewPage = PageGeneratorManager.getMyReviewPage(d);
+		homePage = PageGenerator.getHomePage(d);
+		loginPage = PageGenerator.getLoginPage(d);
+		registerPage = PageGenerator.getRegisterPage(d);
+		myaccountPage = PageGenerator.getMyAccountPage(d);
+		addressPage = PageGenerator.getMyAddressPage(d);
+		changepassPage = PageGenerator.getChangePasswordPage(d);
+		searchPage = PageGenerator.getSearchPage(d);
+		detailPage = PageGenerator.getDetailPage(d);
+		myreviewPage = PageGenerator.getMyReviewPage(d);
 
 		registerNewAccount();
 	}

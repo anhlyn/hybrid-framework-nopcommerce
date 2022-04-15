@@ -5,7 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import commons.PageGeneratorManager;
+import commons.PageGenerator;
 import pageUI.SearchUI;
 
 public class SearchObject extends BasePage{
@@ -25,7 +25,7 @@ public class SearchObject extends BasePage{
 	
 	public DetailProductObject clickByHeader(String headerTitle) {
 		clickToElement(driver, SearchUI.RESULT_BY_HEADER_PATTERN, headerTitle);
-		return PageGeneratorManager.getDetailPage(driver);
+		return PageGenerator.getDetailPage(driver);
 	}
 	
 }

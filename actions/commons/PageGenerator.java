@@ -14,7 +14,7 @@ import pageObject.RegisterObject;
 import pageObject.SearchObject;
 import pageObject.SitemapObject;
 
-public class PageGeneratorManager {
+public class PageGenerator {
 
 	public static HomeObject getHomePage(WebDriver d) {
 		return new HomeObject(d);

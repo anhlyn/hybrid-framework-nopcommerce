@@ -3,7 +3,7 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.PatternUI;
+import commons.Helper;
 import pageUI.LoginUI;
 
 public class LoginObject extends BasePage{
@@ -14,28 +14,18 @@ public class LoginObject extends BasePage{
 		driver = mappingDriver;
 	}
 	
-	public void typeEmailTxt(String em) {
-		sendKeyToElement(driver, LoginUI.EMAIL_INPUT, em);
+	public void FillInfoAndClickLoginBtn(String em, String p) {
+		if(em.length() > 0) {
+			sendKeyToElement(driver, LoginUI.TXT_EMAIL, em);
+		}
+		if(p.length() > 0) {
+			sendKeyToElement(driver, LoginUI.TXT_PASSWORD, p);
+		}
+		Helper.getHelper().clickButtonByClassAndText(this.driver, "buttons", "Log in");
 	}
 	
-	public void typePasswordTxt(String p) {
-		sendKeyToElement(driver, LoginUI.PASSWORD_INPUT, p);
-	}
-	
-	public void clickLoginBtn() {
-		clickToElement(driver, LoginUI.LOGIN_BUTTON);
-	}
-	
-	public String getEmailErrMsg() {
-		return getTextElement(driver, LoginUI.EMAIL_ERR_MSG);
-	}
-	
-	public String getSummaryErrMsg() {
-		return getTextElement(driver, LoginUI.SUMMARY_ERR_MSG);
-	}
-	
-	public boolean isLoginSuccess() {
-		return isWebElementDisplayed(driver, PatternUI.HEADER_LINKS_PATTERN, "logout");
-	}
+	/*public boolean isLoginSuccess() {
+		//return isWebElementDisplayed(driver, PatternUI.HEADER_LINKS_PATTERN, "logout");
+	}*/
 	
 }

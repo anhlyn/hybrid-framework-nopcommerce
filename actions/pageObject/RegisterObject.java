@@ -3,6 +3,7 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import commons.Helper;
 import pageUI.RegisterUI;
 
 public class RegisterObject extends BasePage {
@@ -31,6 +32,18 @@ public class RegisterObject extends BasePage {
 	
 	public void TypeConfirmPassword(String cp) {
 		sendKeyToElement(driver, RegisterUI.TXT_CONFIRM_PASSWORD, cp);
+	}
+	
+	public void FillInformationOnRegisterForm(String fn, String ln, String em, String p, String cp) {
+		Helper.getHelper().clickAnchorByClassAndText(this.driver, "header-links", "Register");
+		
+		this.TypeFirstName(fn);
+		this.TypeLastName(ln);
+		this.TypeEmail(em);
+		this.TypePassword(p);
+		this.TypeConfirmPassword(cp);
+	
+		Helper.getHelper().clickButtonByClassAndText(this.driver, "buttons", "Register");
 	}
 	
 }
