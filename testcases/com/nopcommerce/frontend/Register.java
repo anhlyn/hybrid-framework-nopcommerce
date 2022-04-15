@@ -2,32 +2,42 @@ package com.nopcommerce.frontend;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+
+import com.github.javafaker.Faker;
 
 import commons.BaseTest;
 import commons.EnContanst;
+import commons.Helper;
 import commons.PageGeneratorManager;
 import pageObject.HomeObject;
 import pageObject.RegisterObject;
-import pageUI.PatternUI;
 
 public class Register extends BaseTest{
 	
 	private WebDriver d;
+	private Faker dataFaker;
 	
-	private HomeObject homePage;
-	private RegisterObject registerPage;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private String confirmPassword;
 	
-	private String newEmail = "";
-	
-	@Parameters("browser")
 	@BeforeClass
+	@Parameters("browser")
 	public void preCondition(@Optional("chrome") String b) {		
-		d = getBrowserDriver(b);	
+		d = getBrowserDriver(b);
+		dataFaker = new Faker();
+		
+		firstName = dataFaker.name().firstName();
+		lastName = dataFaker.name().lastName();
+		email = dataFaker.numerify("tester####@gmail.com");
+		password = confirmPassword = dataFaker.bothify("###???");
 		
 		homePage = PageGeneratorManager.getHomePage(d);
 		registerPage = PageGeneratorManager.getRegisterPage(d);
@@ -39,13 +49,15 @@ public class Register extends BaseTest{
 		
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	
 		log.info("- Step 2: click register link on header");
 		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
 		
 		log.info("- Step 3: click register button");
 		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
-		//Verify
+		
+		log.info("- Verify field validation error.");
 		Assert.assertEquals(registerPage.getFieldValidationError(d, "FirstName"), EnContanst.ERR_MSG_REG_FNAME);
 		Assert.assertEquals(registerPage.getFieldValidationError(d, "LastName"), EnContanst.ERR_MSG_REG_LNAME);
 		Assert.assertEquals(registerPage.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_REG_EMAIL);
@@ -59,28 +71,13 @@ public class Register extends BaseTest{
 		
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("- Step 2: click register link on header");
-		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
-		
-		log.info("- Step 3: type firstname");
-		registerPage.typeInputById(d, "FirstName", "first name");
-		
-		log.info("- Step 4: type lastname");
-		registerPage.typeInputById(d, "LastName", "last name");
-		
-		log.info("- Step 5: type email");
-		registerPage.typeInputById(d, "Email", "test@123@456");
-		
-		log.info("- Step 6: type password");
-		registerPage.typeInputById(d, "Password", "123456");
-		
-		log.info("- Step 7: type confirmed pass");
-		registerPage.typeInputById(d, "ConfirmPassword", "123456");
-		
-		log.info("- Step 8: click register btn");
-		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
-		//Verify
+		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");	
+		this.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("???###@???@com"), password, confirmPassword);
+	
+		log.info("- Verify Wrong email validation error.");
 		Assert.assertEquals(registerPage.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_REG_WRONG_EMAIL);
 	}
 	
@@ -89,37 +86,21 @@ public class Register extends BaseTest{
 		log.info("TC: Register_03_Success");
 		
 		log.info("open homepage");
-		homePage.openHomepage();;
+		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
+		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");		
+		this.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
-		String em = "human_" + generateRandomNumber() + "@gmail.com";
-		log.info("generate new email: " + em);
-		
-		log.info("type firstname");
-		registerPage.typeInputById(d, "FirstName", "first name");
-		
-		log.info("type lastname");
-		registerPage.typeInputById(d, "LastName", "last name");
-		
-		log.info("type email");
-		registerPage.typeInputById(d, "Email", em);
-		
-		log.info("type pass");
-		registerPage.typeInputById(d, "Password", "123456");
-		
-		log.info("type confirmed pass");
-		registerPage.typeInputById(d, "ConfirmPassword", "123456");
-		
-		log.info("click register button");
-		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
-		//Verify
+		log.info("- verify register is successful.");
 		Assert.assertEquals(registerPage.getResultMsg(d), EnContanst.MSG_REG_SUCCESS);
-		this.newEmail = em;
 		
 		log.info("click logout link on header");
 		registerPage.clickAnchorByClassAndText(d, "header-links", "Log out");
+		log.info("verify after logout successfully and then redirect to homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	}
 	
 	@Test(enabled=true, dependsOnMethods = "Register_03_Success")
@@ -129,28 +110,14 @@ public class Register extends BaseTest{
 		
 		log.info("open homepage");
 		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
+		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");		
+		this.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
-		log.info("type firstname");
-		registerPage.typeInputById(d, "FirstName", "first name");
-		
-		log.info("type lastname");
-		registerPage.typeInputById(d, "LastName", "last name");
-		
-		log.info("type email");
-		registerPage.typeInputById(d, "Email", this.newEmail);
-		
-		log.info("type pass");
-		registerPage.typeInputById(d, "Password", "123456");
-		
-		log.info("type confirmed pass");
-		registerPage.typeInputById(d, "ConfirmPassword", "123456");
-		
-		log.info("click register button");
-		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
-		
+		log.info("Verify validation email exists.");
 		Assert.assertEquals(registerPage.getSummaryErrMsg(d), EnContanst.ERR_MSG_REG_EMAIL_EXISTS);	
 	}
 	
@@ -160,30 +127,15 @@ public class Register extends BaseTest{
 		log.info("TC: Register_05_Less_6_Characters");
 		log.info("open homepage");
 		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
 		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
-		
-		log.info("type firstname");
-		registerPage.typeInputById(d, "FirstName", "first name");
-		
-		log.info("type lastname");
-		registerPage.typeInputById(d, "LastName", "last name");
-		
-		log.info("type email");
-		registerPage.typeInputById(d, "Email", "human_" + generateRandomNumber() + "@gmail.com");
-		
-		log.info("type pass");
-		registerPage.typeInputById(d, "Password", "123");
-		
-		log.info("type confirmed pass");
-		registerPage.typeInputById(d, "ConfirmPassword", "123456");
-		
-		log.info("click register button");
-		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
+		this.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("????"), confirmPassword);
 
-		//Assert.assertEquals(registerPage.get, "Password must meet the following rules: \nmust have at least 6 characters");
-		Assert.assertTrue(registerPage.getFieldValidationError(d, "Password").contains("must have at least 6 characters"));
+		log.info("Verify password is less than 6 characters.");
+		Assert.assertTrue(registerPage.getFieldValidationError(d, "Password").contains(EnContanst.ERR_PARTIAL_MSG_REG_PASSWORD_LESS_6_CHARACTERS));
 	}
 	
 	@Test(enabled=true)
@@ -191,35 +143,47 @@ public class Register extends BaseTest{
 		log.info("TC: Register_06_ConfirmPass_NotMatch");
 		log.info("open homepage");
 		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
+		log.info("click register link on header");
+		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
+		this.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("??????"), confirmPassword);	
+		
+		log.info("verify confirm password does not match.");
+		Assert.assertEquals(registerPage.getFieldValidationError(d, "ConfirmPassword"), EnContanst.ERR_MSG_REG_CPASSWORD_NOTMATCH);
+	}
+	
+	private void FillInformationOnRegisterForm(String fn, String ln, String em, String p, String cp) {
 		log.info("click register link on header");
 		registerPage = (RegisterObject)registerPage.clickAnchorByClassAndText(d, "header-links", "Register");
 		
 		log.info("type firstname");
-		registerPage.typeInputById(d, "FirstName", "first name");
+		registerPage.TypeFirstName(fn);
 		
 		log.info("type lastname");
-		registerPage.typeInputById(d, "LastName", "last name");
+		registerPage.TypeLastName(ln);
 		
 		log.info("type email");
-		registerPage.typeInputById(d, "Email", "human_" + generateRandomNumber() + "@gmail.com");
+		registerPage.TypeEmail(em);
 		
 		log.info("type pass");
-		registerPage.typeInputById(d, "Password", "123456");
+		registerPage.TypePassword(p);
 		
 		log.info("type confirmed pass");
-		registerPage.typeInputById(d, "ConfirmPassword", "123444");
+		registerPage.TypeConfirmPassword(cp);
 		
 		log.info("click register button");
 		registerPage.clickButtonByClassAndText(d, "buttons", "Register");
-		
-		Assert.assertEquals(registerPage.getFieldValidationError(d, "ConfirmPassword"), EnContanst.ERR_MSG_REG_CPASSWORD_NOTMATCH);
 	}
 	
-	@AfterClass(enabled=true)
+	@AfterClass(enabled=true, alwaysRun=true)
 	public void afterClass() {
 		log.info("close browser");
 		quitBrowser(d);
 	}
+	
+	private HomeObject homePage;
+	private RegisterObject registerPage;
 	
 }

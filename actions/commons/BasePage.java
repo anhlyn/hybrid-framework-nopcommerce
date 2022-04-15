@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import pageObject.RegisterObject;
 import pageUI.CommonUI;
 import pageUI.PatternUI;
 
@@ -26,10 +25,6 @@ public class BasePage {
 	
 	public void quitBrowsers(WebDriver driver) {
 		driver.quit();
-	}
-	
-	public String getPageTitle(WebDriver driver) {
-		return driver.getTitle();
 	}
 	
 	public String getCurrentPageUrl(WebDriver driver) {
