@@ -155,7 +155,7 @@ public class Login extends BaseTest{
 
 	}
 	
-	@Test(enabled = false, dependsOnMethods = "Register_New_Account")
+	@Test(enabled = true, dependsOnMethods = "Register_New_Account")
 	public void Login_06_Success() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");

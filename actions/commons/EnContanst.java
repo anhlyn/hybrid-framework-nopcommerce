@@ -24,4 +24,7 @@ public class EnContanst {
 	
 	public static final String MSG_PASSWORD_CHANGED_SUCCESSFULLY = "Password was changed";
 	
+	public static final String MSG_SEARCH_EMPTY_KEYWORD = "Search term minimum length is 3 characters";
+	public static final String MSG_SEARCH_NOT_EXISTS = "No products were found that matched your criteria.";
+	
 }

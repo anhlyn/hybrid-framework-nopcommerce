@@ -1,20 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-  
-<suite name="NopCommerce Suite" verbose="1" >
 
-  <!--<listeners>
-      <listener class-name="reportConfig.ExtentReportListenerV2" />
-      <listener class-name="org.uncommons.reportng.HTMLReporter" />
-      <listener class-name="com.nopcommerce.frontend.TestListener" />
-  </listeners>-->
+<suite name="NopCommerce Suite" verbose="1">
 
-  <test name="Frontend Tests" >
-  	
-  	<parameter name="browser" value="chrome" /> 
-    <classes>
-        <class name="com.nopcommerce.frontend.Register" />
-        <class name="com.nopcommerce.frontend.Login" />
-    </classes>
-  </test>
-  
+	<!--<listeners> <listener class-name="reportConfig.ExtentReportListenerV2" 
+		/> <listener class-name="org.uncommons.reportng.HTMLReporter" /> <listener 
+		class-name="com.nopcommerce.frontend.TestListener" /> </listeners> -->
+
+	<test name="Frontend Tests">
+
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.nopcommerce.frontend.Register" />
+			<class name="com.nopcommerce.frontend.Login" />
+		</classes>
+	</test>
+
 </suite>

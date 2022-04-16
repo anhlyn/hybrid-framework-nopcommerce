@@ -99,6 +99,13 @@ public class BasePage {
 		}
 	}
 	
+	public void uncheckTheCheckbox(WebDriver driver, String locatorPattern, String... params) {
+		WebElement element = getWebElement(driver, locatorPattern, params);
+		if(element.isSelected()) {
+			element.click();
+		}
+	}
+	
 	public void selectDefaultDropdown(WebElement element, String item) {
 		Select cb = new Select(element);
 		cb.selectByVisibleText(item);
