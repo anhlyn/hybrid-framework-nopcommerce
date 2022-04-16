@@ -64,31 +64,17 @@ public class Helper extends BasePage{
 	}
 	
 	//click menu
-	public Object clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
+	public void clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
 		clickToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
-		if(attrText.toLowerCase().contains("register")) {
-			return PageGenerator.getRegisterPage(driver);
-		}
-		if(attrText.toLowerCase().contains("log in")) {
-			return PageGenerator.getLoginPage(driver);
-		}
-		if(attrText.toLowerCase().contains("log out")) {
-			return PageGenerator.getHomePage(driver);
-		}
-		if(attrText.toLowerCase().contains("my account")) {
-			return PageGenerator.getCustomerInfoPage(driver);
-		}
-		if(attrText.toLowerCase().contains("addresses")) {
-			return PageGenerator.getAddressPage(driver);
-		}
-		if(attrText.toLowerCase().contains("change password")) {
-			return PageGenerator.getChangePasswordPage(driver);
-		}
-		return new Object();
 	}
 	
 	public boolean isLoginSuccessful(WebDriver driver) {
 		return isWebElementDisplayed(driver, CommonUI.LOGOUT_LINK_ON_HEADER);
+	}
+	
+	public void HoverParentAndClickSubMenu(WebDriver driver, String parentMenu, String childMenu) {
+		hoverMouseToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, "header-menu", parentMenu);
+		this.clickAnchorByClassAndText(driver, "sublist first-level", childMenu);
 	}
 	
 }

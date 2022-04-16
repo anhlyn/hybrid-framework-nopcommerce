@@ -53,7 +53,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	
 		log.info("- Step 2: click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");
 		
 		log.info("- Step 3: click register button");
 		helper.clickButtonByClassAndText(d, "buttons", "Register");
@@ -75,7 +75,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("- Step 2: click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");	
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("???###@???@com"), password, confirmPassword);
 	
 		log.info("- Verify Wrong email validation error.");
@@ -92,7 +92,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
 		log.info("- verify register is successful.");
@@ -115,7 +115,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
 		log.info("Verify validation email exists.");
@@ -132,7 +132,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("????"), confirmPassword);
 
 		log.info("Verify password is less than 6 characters.");
@@ -148,7 +148,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("??????"), confirmPassword);	
 		
 		log.info("verify confirm password does not match.");

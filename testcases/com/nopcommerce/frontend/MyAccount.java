@@ -75,18 +75,18 @@ public class MyAccount extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
 		registerPage.FillInformationOnRegisterForm(this.registeredAcc.firstName, this.registeredAcc.lastName, this.registeredAcc.email, this.registeredAcc.password, this.registeredAcc.confirmPassword);
 		
 		log.info("- verify register is successful.");
 		Assert.assertEquals(helper.getResultMsg(d), EnContanst.MSG_REG_SUCCESS);
 	}
 	
-	@Test(enabled=false,dependsOnMethods = {"RegisterNewAccount"})
+	@Test(enabled=true,dependsOnMethods = {"RegisterNewAccount"})
 	public void MyAccount_01_Update_CustomerInfo() {
 		log.info("TC: MyAccount_01_Update_CustomerInfo");
 		
-		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
 		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
 		
 		if(customerInfo.gender.toLowerCase()=="f") {
@@ -118,14 +118,14 @@ public class MyAccount extends BaseTest{
 
 	}
 	
-	@Test(enabled=false,dependsOnMethods = {"RegisterNewAccount"})
+	@Test(enabled=true,dependsOnMethods = {"RegisterNewAccount"})
 	public void MyAccount_O2_Add_Address() {
 		log.info("TC: MyAccount_O2_Add_Address");
 		
-		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
 		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
 		
-		addressPage = (AddressObject)helper.clickAnchorByClassAndText(this.d, "side-2", "Addresses");
+		helper.clickAnchorByClassAndText(this.d, "side-2", "Addresses");
 		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/addresses"));
 		
 		helper.clickButtonByClassAndText(this.d, "add-button", "Add new");
@@ -162,10 +162,10 @@ public class MyAccount extends BaseTest{
 	public void MyAccount_03_Change_Password() {
 		log.info("TC: MyAccount_03_Change_Password");
 		
-		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
 		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
 		
-		changepassPage = (ChangePasswordObject)helper.clickAnchorByClassAndText(this.d, "side-2", "Change password");
+		helper.clickAnchorByClassAndText(this.d, "side-2", "Change password");
 		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/changepassword"));
 		
 		helper.typeInputById(this.d, "OldPassword", registeredAcc.password);
@@ -183,10 +183,10 @@ public class MyAccount extends BaseTest{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		homePage = (HomeObject)helper.clickAnchorByClassAndText(this.d, "header-links", "Log out");
+		helper.clickAnchorByClassAndText(this.d, "header-links", "Log out");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(registeredAcc.email, registeredAcc.password);
@@ -237,7 +237,7 @@ public class MyAccount extends BaseTest{
 		Assert.assertEquals(rating, 4);
 	}*/
 	
-	@AfterClass(enabled=false, alwaysRun=true)
+	@AfterClass(enabled=true, alwaysRun=true)
 	 public void afterClass() {
 		log.info("close browser");
 		quitBrowser(d);

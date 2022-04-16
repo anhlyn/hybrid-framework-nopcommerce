@@ -12,6 +12,8 @@
 		<classes>
 			<class name="com.nopcommerce.frontend.Register" />
 			<class name="com.nopcommerce.frontend.Login" />
+			<class name="com.nopcommerce.frontend.MyAccount" />
+			<class name="com.nopcommerce.frontend.Search" />
 		</classes>
 	</test>
 

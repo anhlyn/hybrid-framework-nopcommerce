@@ -58,7 +58,7 @@ public class Search extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
 		registerPage.FillInformationOnRegisterForm(dataFaker.name().firstName(), dataFaker.name().lastName(), email, password, password);
 		
 		log.info("- verify register is successful.");
@@ -79,7 +79,7 @@ public class Search extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, password);

@@ -54,7 +54,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
 		registerPage.FillInformationOnRegisterForm(dataFaker.name().firstName(), dataFaker.name().lastName(), email, password, password);
 		
 		log.info("- verify register is successful.");
@@ -66,7 +66,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	}
 
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void Login_01_Empty_Data() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -75,7 +75,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn("", "");
@@ -84,7 +84,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_EMAIL);	
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void Login_02_Invalid_Email() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -93,7 +93,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????##@???@??##"), password);
@@ -102,7 +102,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_WRONG_EMAIL);
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void Login_03_Not_Registered_Email() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -111,7 +111,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 
 		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????###@????.com"), password);
@@ -120,7 +120,7 @@ public class Login extends BaseTest{
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_NOT_REGISTERED_EMAIL));
 	}
 	
-	@Test(enabled=false, dependsOnMethods = "Register_New_Account")
+	@Test(enabled=true, dependsOnMethods = "Register_New_Account")
 	public void Login_04_Empty_Password() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -129,7 +129,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, "");
@@ -137,7 +137,7 @@ public class Login extends BaseTest{
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
 	}
 	
-	@Test(enabled = false, dependsOnMethods = "Register_New_Account")
+	@Test(enabled = true, dependsOnMethods = "Register_New_Account")
 	public void Login_05_Wrong_Password() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -146,7 +146,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, dataFaker.bothify("????####"));
@@ -164,7 +164,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
-		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, password);
@@ -174,7 +174,7 @@ public class Login extends BaseTest{
 		
 	}
 	
-	 @AfterClass(enabled=false, alwaysRun=true)
+	 @AfterClass(enabled=true, alwaysRun=true)
 	 public void afterClass() {
 		log.info("close browser");
 		quitBrowser(d);
