@@ -31,6 +31,14 @@ public class Helper extends BasePage{
 		sendKeyToElement(driver, PatternUI.INPUT_BY_NAME, text, name);
 	}
 	
+	public String getInputValueById(WebDriver driver, String id) {
+		return getAttributeValue(driver, PatternUI.INPUT_BY_ID, "value", id);
+	}
+	
+	public void clickInputById(WebDriver driver, String id) {
+		clickToElement(driver, PatternUI.INPUT_BY_ID, id);
+	}
+	
 	public void selectItemFromDropdownByName(WebDriver driver, String name, String item) {
 		selectDefaultDropdown(driver, item, PatternUI.SEL_BY_NAME, name);
 	}
@@ -41,6 +49,10 @@ public class Helper extends BasePage{
 	
 	public void clickButtonByClassAndText(WebDriver driver, String attrClass, String attrText) {
 		clickToElement(driver, PatternUI.BUTTON_BY_CLASS_AND_TEXT, attrClass, attrText);
+	}
+	
+	public boolean isRdoSelectedById(WebDriver driver, String id) {
+		return isWebElementSelected(driver, PatternUI.INPUT_BY_ID, id);
 	}
 	
 	public String getResultMsg(WebDriver driver) {
@@ -59,6 +71,18 @@ public class Helper extends BasePage{
 		}
 		if(attrText.toLowerCase().contains("log in")) {
 			return PageGenerator.getLoginPage(driver);
+		}
+		if(attrText.toLowerCase().contains("log out")) {
+			return PageGenerator.getHomePage(driver);
+		}
+		if(attrText.toLowerCase().contains("my account")) {
+			return PageGenerator.getCustomerInfoPage(driver);
+		}
+		if(attrText.toLowerCase().contains("addresses")) {
+			return PageGenerator.getAddressPage(driver);
+		}
+		if(attrText.toLowerCase().contains("change password")) {
+			return PageGenerator.getChangePasswordPage(driver);
 		}
 		return new Object();
 	}

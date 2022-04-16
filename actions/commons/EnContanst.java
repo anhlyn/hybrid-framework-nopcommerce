@@ -22,4 +22,6 @@ public class EnContanst {
 	public static final String ERR_MSG_REG_CPASSWORD_NOTMATCH = "The password and confirmation password do not match.";
 	public static final String ERR_PARTIAL_MSG_REG_PASSWORD_LESS_6_CHARACTERS = "must have at least 6 characters";
 	
+	public static final String MSG_PASSWORD_CHANGED_SUCCESSFULLY = "Password was changed";
+	
 }

@@ -3,7 +3,9 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
+import commons.EnContanst;
 import pageUI.ChangePasswordUI;
+import pageUI.CommonUI;
 
 public class ChangePasswordObject extends BasePage{
 	
@@ -13,32 +15,12 @@ public class ChangePasswordObject extends BasePage{
 		driver = mappingDriver;
 	}
 	
-	public void typeOldPass(String p) {
-		sendKeyToElement(driver, ChangePasswordUI.OLD_PASS_INPUT, p);
-	}
-	
-	public void typeNewPass(String p) {
-		sendKeyToElement(driver, ChangePasswordUI.NEW_PASS_INPUT, p);
-	}
-	
-	public void typeConfirmPass(String p) {
-		sendKeyToElement(driver, ChangePasswordUI.CONFIRM_PASS_INPUT, p);
-	}
-	
-	public void clickChangePassword() {
-		clickToElement(driver, ChangePasswordUI.CHANGE_PASS_BTN);
-	}
-	
-	public boolean isChangePasswordLoaded() {
-		return getCurrentPageUrl(driver).contains("customer/changepassword");
-	}
-	
-	public boolean isSuccess() {
-		return getTextElement(driver, ChangePasswordUI.BAR_NOTI_CONTENT).contains("Password was changed");
+	public boolean isChangePassSuccessfull() {
+		return getTextElement(driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT).contains(EnContanst.MSG_PASSWORD_CHANGED_SUCCESSFULLY);
 	}
 	
 	public void closeNoti() {
-		clickToElement(driver, ChangePasswordUI.BAR_NOTI_CLOSE);
+		clickToElement(driver, CommonUI.BAR_NOTI_CLOSE);
 	}
 	
 }

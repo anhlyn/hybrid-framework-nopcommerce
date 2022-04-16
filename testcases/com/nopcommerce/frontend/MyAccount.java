@@ -6,216 +6,201 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import com.github.javafaker.Faker;
+
 import commons.BaseTest;
+import commons.EnContanst;
+import commons.Helper;
 import commons.PageGenerator;
 import pageObject.ChangePasswordObject;
 import pageObject.DetailProductObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
-import pageObject.MyAccountObject;
-import pageObject.MyAddressObject;
+import pageObject.CustomerInfoObject;
+import pageObject.AddressObject;
 import pageObject.MyReviewObject;
 import pageObject.RegisterObject;
 import pageObject.SearchObject;
+import pageUI.PatternUI;
 
 public class MyAccount extends BaseTest{
 	
 	private WebDriver d;
+	private Helper helper;
+	private DataTest datatest;
+	private DataTest.RegisteredAccount registeredAcc;
+	private DataTest.CustomerInfo customerInfo;
+	private DataTest.Address address;
+	private String newPassword;
 	
-	private HomeObject homePage;
-	private LoginObject loginPage;
-	private RegisterObject registerPage;
-	private MyAccountObject myaccountPage;
-	private MyAddressObject addressPage;
-	private ChangePasswordObject changepassPage;
-	private SearchObject searchPage;
-	private DetailProductObject detailPage;
-	private MyReviewObject myreviewPage;
-	
-	private String email = "";
-	private String password = "123456";
-	
-	@Parameters("browser")
 	@BeforeClass
-	public void preCondition(String b) {	
+	@Parameters("browser")
+	public void preCondition(@Optional("chrome") String b) {	
 		d = getBrowserDriver(b);	
+		helper = Helper.getHelper();
 		
-		//khoi tao pages
+		//init data
+		datatest = new DataTest();
+		registeredAcc = datatest.new RegisteredAccount();
+		customerInfo = datatest.new CustomerInfo();
+		address = datatest.new Address();
+		newPassword = (new Faker()).bothify("????####");
+		
+		//init pages object
 		homePage = PageGenerator.getHomePage(d);
 		loginPage = PageGenerator.getLoginPage(d);
 		registerPage = PageGenerator.getRegisterPage(d);
-		myaccountPage = PageGenerator.getMyAccountPage(d);
-		addressPage = PageGenerator.getMyAddressPage(d);
+		customerInfoPage = PageGenerator.getCustomerInfoPage(d);
+		addressPage = PageGenerator.getAddressPage(d);
 		changepassPage = PageGenerator.getChangePasswordPage(d);
 		searchPage = PageGenerator.getSearchPage(d);
 		detailPage = PageGenerator.getDetailPage(d);
 		myreviewPage = PageGenerator.getMyReviewPage(d);
-
-		registerNewAccount();
 	}
 	
-	private void registerNewAccount() {
-		//step 1: open homepage
-		log.info("Open homepage");
-		homePage.open();
-		//step 2: click register link on header
-		log.info("Click register link on header");
-		registerPage = registerPage.clickRegisterLinkOnHeader(d);
-		//step 3: fill all correct data
-		String em = "human_" + generateRandomNumber() + "@gmail.com";
-		System.out.println("-- new email: " + em);
-		log.info("Generate new email name : " + em);
+	@Test(enabled=true)
+	public void RegisterNewAccount() {
 		
-		log.info("Type first name textbox: first name");
-		registerPage.typeFirstnameTxt("first name");
-		log.info("Type last name textbox: last name");
-		registerPage.typeLastnameTxt("last name");
-		log.info("Type email textbox: "+em);
-		registerPage.typeEmailTxt(em);
-		log.info("Type password textbox: 123456");
-		registerPage.typePasswordTxt("123456");
-		log.info("Type confirm password textbox: 123456");
-		registerPage.typeCPasswordTxt("123456");
-		log.info("Click register button");
-		registerPage.clickRegisterBtn();
-		//Verify
-		log.info("Verify your registration...");
-		Assert.assertEquals(registerPage.getSuccessMsg(), "Your registration completed");
-		this.email = em;
+		log.info("Pre-Condition: RegisterNewAccount");
 		
-		log.info("Click logout link on header.");
-		registerPage.clickLogoutOnHeader(d);
-	}
-	
-	@BeforeMethod
-	private void login() {
-		log.info("@BeforeMethod: login()");
-		//step 2: click login link on header
-		loginPage.clickLoginOnHeader(d);
-		//step 3:
-		loginPage.typeEmailTxt(this.email);
-		loginPage.typePasswordTxt(this.password);
-		//step 4:
-		loginPage.clickLoginBtn();
-		//Verify
-		Assert.assertTrue(loginPage.isLoginSuccess());
-	}
-	
-	@AfterMethod
-	private void logout() {
-		log.info("@AfterMethod: logout()");
-		homePage.clickLogoutOnHeader(d);
-	}
-	
-	@Test
-	public void MyAccount_O1_Update_Info() {
-		log.info("TC: MyAccount_O1_Update_Info");
+		log.info("open homepage");
+		homePage.openHomepage();
+		log.info("verify open homepage");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		//step 1: click My Account
-		myaccountPage.clickMyAccountLinkOnHeader(d);
-		Assert.assertTrue(myaccountPage.isCustomerInfoLoaded());
-		//step 2: update info
-		myaccountPage.selectFemaleRdo();
-		myaccountPage.typeFirstName("Automation");
-		myaccountPage.typeLastName("FC");
-		myaccountPage.selectDateOfBirth("1");
-		myaccountPage.selectMonthOfBirth("January");
-		myaccountPage.selectYearOfBirth("1999");
-		String updatedEmail = "human_" + generateRandomNumber() + "@gmail.com";
-		System.out.println("updated email: " + updatedEmail);
-		myaccountPage.typeEmailInput(updatedEmail);
-		myaccountPage.typeCompanyInput("Automation FC");
-		//step 3: click save
-		myaccountPage.save();
+		log.info("click register link on header");
+		registerPage = (RegisterObject)helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		registerPage.FillInformationOnRegisterForm(this.registeredAcc.firstName, this.registeredAcc.lastName, this.registeredAcc.email, this.registeredAcc.password, this.registeredAcc.confirmPassword);
+		
+		log.info("- verify register is successful.");
+		Assert.assertEquals(helper.getResultMsg(d), EnContanst.MSG_REG_SUCCESS);
+	}
+	
+	@Test(enabled=false,dependsOnMethods = {"RegisterNewAccount"})
+	public void MyAccount_01_Update_CustomerInfo() {
+		log.info("TC: MyAccount_01_Update_CustomerInfo");
+		
+		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
+		
+		if(customerInfo.gender.toLowerCase()=="f") {
+			helper.clickInputById(this.d, "gender-female");
+		}else {
+			helper.clickInputById(this.d, "gender-male");
+		}
+		
+		helper.typeInputById(this.d, "FirstName", customerInfo.firstName);
+		helper.typeInputById(this.d, "LastName", customerInfo.lastName);
+		helper.selectItemFromDropdownByName(this.d, "DateOfBirthDay", customerInfo.birthDay);
+		helper.selectItemFromDropdownByName(this.d, "DateOfBirthMonth", customerInfo.birthMonth);
+		helper.selectItemFromDropdownByName(this.d, "DateOfBirthYear", customerInfo.birthYear);
+		helper.typeInputById(this.d, "Email", customerInfo.email);
+		helper.typeInputById(this.d, "Company", customerInfo.company);
+		
+		helper.clickButtonByClassAndText(this.d, "buttons", "Save");
+		
 		//step 4: verify
-		Assert.assertTrue(myaccountPage.isFemaleRdoSelected());
-		Assert.assertEquals(myaccountPage.getFirstNameValue(), "Automation");
-		Assert.assertEquals(myaccountPage.getLastNameValue(), "FC");
-		Assert.assertEquals(myaccountPage.getSelectedValueOfBirthday(), "1");
-		Assert.assertEquals(myaccountPage.getSelectedValueOfBirthMonth(), "January");
-		Assert.assertEquals(myaccountPage.getSelectedValueOfBirthYear(), "1999");
-		Assert.assertEquals(myaccountPage.getEmailValue(), updatedEmail);
-		Assert.assertEquals(myaccountPage.getCompanyValue(), "Automation FC");
-		
-		this.email = updatedEmail;
+		String genderId = "gender-male";
+		if(customerInfo.gender.toLowerCase()=="f") {
+			genderId = "gender-female";
+		}
+		Assert.assertTrue(helper.isRdoSelectedById(this.d, genderId));
+		Assert.assertEquals(helper.getInputValueById(this.d, "FirstName"), customerInfo.firstName);
+		Assert.assertEquals(helper.getInputValueById(this.d, "LastName"), customerInfo.lastName);
+		Assert.assertEquals(helper.getInputValueById(this.d, "Email"), customerInfo.email);
+		Assert.assertEquals(helper.getInputValueById(this.d, "Company"), customerInfo.company);
+
 	}
 	
-	@Test
+	@Test(enabled=false,dependsOnMethods = {"RegisterNewAccount"})
 	public void MyAccount_O2_Add_Address() {
 		log.info("TC: MyAccount_O2_Add_Address");
-		//step 0: click My Account on header
-		addressPage.clickMyAccountLinkOnHeader(d);
-		//step 1: click Addresses
-		addressPage.clickMyAddressesOnSidebar(d);
-		//Assert.assertTrue(addressPage.isAddressesLoaded());
-		//step 2: add new address
-		addressPage.clickAddNew();
-		addressPage.typeFirstName("Automation");
-		addressPage.typeLastName("FC");
-		addressPage.typeEmailInput("automationfc.vn@gmail.com");
-		addressPage.typeCompanyInput("Automation FC");
-		addressPage.selectCountry("Viet Nam");
-		addressPage.typeCityInput("Da Nang");
-		addressPage.typeAddress1Input("123/04 Le Lai");
-		addressPage.typeAddress2Input("234/05 Hai Phong");
-		addressPage.typePostalCodeInput("550000");
-		addressPage.typePhoneInput("0123456789");
-		addressPage.typeFaxInput("0987654321");
-		//step 3: click save
-		addressPage.save();
-		//step 4: verify
-		Assert.assertEquals(addressPage.getFullName(), "Automation FC");
-		Assert.assertTrue(addressPage.getEmail().contains("automationfc.vn@gmail.com"));
-		Assert.assertTrue(addressPage.getPhone().contains("0123456789"));
-		Assert.assertTrue(addressPage.getFax().contains("0987654321"));
-		Assert.assertTrue(addressPage.getCompany().contains("Automation FC"));
-		Assert.assertTrue(addressPage.getAddress1().contains("123/04 Le Lai"));
-		Assert.assertTrue(addressPage.getAddress2().contains("234/05 Hai Phong"));
-		Assert.assertTrue(addressPage.getCityPostalCode().contains("Da Nang, 550000"));
-		Assert.assertTrue(addressPage.getCountry().contains("Viet Nam"));
+		
+		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
+		
+		addressPage = (AddressObject)helper.clickAnchorByClassAndText(this.d, "side-2", "Addresses");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/addresses"));
+		
+		helper.clickButtonByClassAndText(this.d, "add-button", "Add new");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/addressadd"));
+		
+		helper.typeInputById(this.d, "Address_FirstName", address.firstName);
+		helper.typeInputById(this.d, "Address_LastName", address.lastName);
+		helper.typeInputById(this.d, "Address_Email", address.email);
+		helper.typeInputById(this.d, "Address_Company", address.company);
+		helper.selectItemFromDropdownByName(this.d, "Address.CountryId", address.country);
+		helper.typeInputById(this.d, "Address_City", address.city);
+		helper.typeInputById(this.d, "Address_Address1", address.address1);
+		helper.typeInputById(this.d, "Address_Address2", address.address2);
+		helper.typeInputById(this.d, "Address_ZipPostalCode", address.zip);
+		helper.typeInputById(this.d, "Address_PhoneNumber", address.phone);
+		helper.typeInputById(this.d, "Address_FaxNumber", address.fax);
+		
+		helper.clickButtonByClassAndText(this.d, "buttons", "Save");
+		
+		//Verify
+		Assert.assertTrue(addressPage.getFullNameText().contains(address.firstName + " " + address.lastName));
+		Assert.assertTrue(addressPage.getEmailText().contains(address.email));
+		Assert.assertTrue(addressPage.getPhoneText().contains(address.phone));
+		Assert.assertTrue(addressPage.getFaxText().contains(address.fax));
+		Assert.assertTrue(addressPage.getCompanyText().contains(address.company));
+		Assert.assertTrue(addressPage.getAddress1Text().contains(address.address1));
+		Assert.assertTrue(addressPage.getAddress2Text().contains(address.address2));
+		Assert.assertTrue(addressPage.getCityAndZipText().contains(address.city + ", " + address.zip));
+		Assert.assertTrue(addressPage.getCountryText().contains(address.country));
+		
 	}
 	
-	@Test
+	@Test(enabled=true,dependsOnMethods = {"RegisterNewAccount"})
 	public void MyAccount_03_Change_Password() {
 		log.info("TC: MyAccount_03_Change_Password");
-		//step 0: click My account on header
-		changepassPage.clickMyAccountLinkOnHeader(d);
-		//step 1: click chang password on sidebar
-		changepassPage.clickChangePasswordOnSidebar(d);
-		Assert.assertTrue(changepassPage.isChangePasswordLoaded());
-		//step 2: fill new pass
-		changepassPage.typeOldPass("123456");
-		changepassPage.typeNewPass("654321");
-		changepassPage.typeConfirmPass("654321");
-		//step 3: click change password
-		changepassPage.clickChangePassword();
-		Assert.assertTrue(changepassPage.isSuccess());
-		//step 4: close success noti
+		
+		customerInfoPage = (CustomerInfoObject)helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/info"));
+		
+		changepassPage = (ChangePasswordObject)helper.clickAnchorByClassAndText(this.d, "side-2", "Change password");
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("customer/changepassword"));
+		
+		helper.typeInputById(this.d, "OldPassword", registeredAcc.password);
+		helper.typeInputById(this.d, "NewPassword", this.newPassword);
+		helper.typeInputById(this.d, "ConfirmNewPassword", this.newPassword);
+		
+		helper.clickButtonByClassAndText(this.d, "buttons", "Change password");
+		
+		Assert.assertTrue(changepassPage.isChangePassSuccessfull());
+		
 		changepassPage.closeNoti();
-		//step 5: click logout
-		changepassPage.clickLogoutOnHeader(d);
-		//step 6: login with old password
-		changepassPage.clickLoginOnHeader(d);
-		loginPage.typeEmailTxt(this.email);
-		loginPage.typePasswordTxt("123456");
-		loginPage.clickLoginBtn();
-		Assert.assertTrue(loginPage.getSummaryErrMsg().contains("The credentials provided are incorrect"));
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		homePage = (HomeObject)helper.clickAnchorByClassAndText(this.d, "header-links", "Log out");
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
-		//step 7: login with new password
-		changepassPage.clickLoginOnHeader(d);
-		loginPage.typeEmailTxt(this.email);
-		loginPage.typePasswordTxt("654321");
-		loginPage.clickLoginBtn();
+		loginPage = (LoginObject)helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
-		this.password = "654321";
+		loginPage.FillInfoAndClickLoginBtn(registeredAcc.email, registeredAcc.password);
+		System.out.println("email: " + registeredAcc.email + " | pass: " + registeredAcc.password);
+		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
+		
+		loginPage.FillInfoAndClickLoginBtn(registeredAcc.email, this.newPassword);
+		System.out.println("email: " + registeredAcc.email + " | pass: " + this.newPassword);
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		Assert.assertTrue(helper.isLoginSuccessful(this.d));
+		
 	}
 	
-	@Parameters("product_add_review")
+	/*@Parameters("product_add_review")
 	@Test(enabled = true)
 	public void MyAccount_04_Add_Review(String productName) {
 		log.info("TC: MyAccount_04_Add_Review");
@@ -250,13 +235,22 @@ public class MyAccount extends BaseTest{
 			rating = 2;
 		}
 		Assert.assertEquals(rating, 4);
-	}
+	}*/
 	
-	
-	@AfterClass
-	public void afterClass() {
-		log.info("@AfterClass: close browser");
+	@AfterClass(enabled=false, alwaysRun=true)
+	 public void afterClass() {
+		log.info("close browser");
 		quitBrowser(d);
 	}
+
+	private HomeObject homePage;
+	private LoginObject loginPage;
+	private RegisterObject registerPage;
+	private CustomerInfoObject customerInfoPage;
+	private AddressObject addressPage;
+	private ChangePasswordObject changepassPage;
+	private SearchObject searchPage;
+	private DetailProductObject detailPage;
+	private MyReviewObject myreviewPage;
 	
 }

@@ -7,8 +7,8 @@ import pageObject.ChangePasswordObject;
 import pageObject.DetailProductObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
-import pageObject.MyAccountObject;
-import pageObject.MyAddressObject;
+import pageObject.CustomerInfoObject;
+import pageObject.AddressObject;
 import pageObject.MyReviewObject;
 import pageObject.RegisterObject;
 import pageObject.SearchObject;
@@ -24,8 +24,8 @@ public class PageGenerator {
 		return new RegisterObject(d);
 	}
 	
-	public static MyAccountObject getMyAccountPage(WebDriver d) {
-		return new MyAccountObject(d);
+	public static CustomerInfoObject getCustomerInfoPage(WebDriver d) {
+		return new CustomerInfoObject(d);
 	}
 	
 	public static SitemapObject getSitemapPage(WebDriver d) {
@@ -40,8 +40,8 @@ public class PageGenerator {
 		return new LoginObject(d);
 	}
 	
-	public static MyAddressObject getMyAddressPage(WebDriver d) {
-		return new MyAddressObject(d);
+	public static AddressObject getAddressPage(WebDriver d) {
+		return new AddressObject(d);
 	}
 	
 	public static ChangePasswordObject getChangePasswordPage(WebDriver d) {

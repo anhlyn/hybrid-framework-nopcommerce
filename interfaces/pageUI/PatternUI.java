@@ -7,7 +7,7 @@ public class PatternUI {
 	
 	public static final String SPAN_ERROR_BY_ID = "//span[@class='field-validation-error']/span[contains(@id,'%s')]";
 	
-	public static final String INPUT_BY_ID = "//input[contains(@id, '%s')]";
-	public static final String INPUT_BY_NAME = "//input[contains(@name, '%s')]";
-	public static final String SEL_BY_NAME = "//select[contains(@name, '%s')]";
+	public static final String INPUT_BY_ID = "//input[@id='%s']";
+	public static final String INPUT_BY_NAME = "//input[@name='%s']";
+	public static final String SEL_BY_NAME = "//select[@name='%s']";
 }
