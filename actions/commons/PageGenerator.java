@@ -13,6 +13,7 @@ import pageObject.MyReviewObject;
 import pageObject.RegisterObject;
 import pageObject.SearchObject;
 import pageObject.SitemapObject;
+import pageObject.SortObject;
 
 public class PageGenerator {
 
@@ -50,6 +51,10 @@ public class PageGenerator {
 	
 	public static SearchObject getSearchPage(WebDriver d) {
 		return new SearchObject(d);
+	}
+	
+	public static SortObject getSortPage(WebDriver d) {
+		return new SortObject(d);
 	}
 	
 	public static DetailProductObject getDetailPage(WebDriver d) {

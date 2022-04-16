@@ -10,4 +10,6 @@ public class CommonUI {
 	public static final String BAR_NOTI_SUCCESS_CONTENT = "//div[@class='bar-notification success']/p[@class='content']";
 	public static final String BAR_NOTI_CLOSE = "//div[contains(@class, 'bar-notification')]//span[@class='close']";
 	
+	public static final String BREADSCRUM = "//div[@class='breadcrumb']";
+	public static final String AJAX_PRODUCTS_BUSY = "//div[@class='ajax-products-busy']";
 }

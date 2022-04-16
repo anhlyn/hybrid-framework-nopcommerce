@@ -8,9 +8,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
+	
+	protected WebDriverWait wait;
 	
 	public void openPageUrl(WebDriver driver, String url) {
 		driver.get(url);
@@ -69,18 +73,6 @@ public class BasePage {
 		return getWebElement(driver, locatorPattern, params).getCssValue(cssAttribute);
 	}
 	
-	public boolean isWebElementDisplayed(WebElement element) {
-		return element.isDisplayed();
-	}
-	
-	public boolean isWebElementSelected(WebElement element) {
-		return element.isSelected();
-	}
-	
-	public boolean isWebElementEnabled(WebElement element) {
-		return element.isEnabled();
-	}
-	
 	public boolean isWebElementDisplayed(WebDriver driver, String locatorPattern, String... params) {
 		return getWebElement(driver, locatorPattern, params).isDisplayed();
 	}
@@ -91,6 +83,11 @@ public class BasePage {
 	
 	public boolean isWebElementEnabled(WebDriver driver, String locatorPattern, String... params) {
 		return getWebElement(driver, locatorPattern, params).isEnabled();
+	}
+	
+	public boolean isWebElementNotExistsInHTML(WebDriver driver, String locatorPattern, String... params) {
+		List<WebElement> lst = getWebElements(driver, locatorPattern, params);
+		return (lst.size()==0);
 	}
 	
 	public void uncheckTheCheckbox(WebElement element) {
@@ -178,6 +175,17 @@ public class BasePage {
 		WebElement a = getWebElement(driver, locatorPatternA, params);
 		WebElement b = getWebElement(driver, locatorPatternB, params);
 		createActionFromDriver(driver).dragAndDrop(a, b).build().perform();
+	}
+	
+	//Wait
+	public void waitUntilElementInvisible(WebDriver driver, String locatorPattern, String... params) {
+		wait = new WebDriverWait(driver, 2);
+		wait.until(ExpectedConditions.invisibilityOf(getWebElement(driver, locatorPattern, params)));
+	}
+	
+	public void waitUntilElementClickable(WebDriver driver, String locatorPattern, String... params) {
+		wait = new WebDriverWait(driver, 2);
+		wait.until(ExpectedConditions.elementToBeClickable(getWebElement(driver, locatorPattern, params)));
 	}
 	
 }

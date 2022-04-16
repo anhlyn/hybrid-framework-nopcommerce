@@ -74,7 +74,11 @@ public class Helper extends BasePage{
 	
 	public void HoverParentAndClickSubMenu(WebDriver driver, String parentMenu, String childMenu) {
 		hoverMouseToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, "header-menu", parentMenu);
-		this.clickAnchorByClassAndText(driver, "sublist first-level", childMenu);
+		clickToElement(driver, PatternUI.SUBMENU_BY_TEXT, childMenu);
+	}
+	
+	public String getBreadScrumText(WebDriver driver) {
+		return getTextElement(driver, CommonUI.BREADSCRUM);
 	}
 	
 }
