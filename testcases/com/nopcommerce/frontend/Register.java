@@ -92,7 +92,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");	
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
 		log.info("- verify register is successful.");
@@ -115,7 +115,7 @@ public class Register extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");
 		registerPage.FillInformationOnRegisterForm(firstName, lastName, email, password, confirmPassword);
 		
 		log.info("Verify validation email exists.");
@@ -149,7 +149,7 @@ public class Register extends BaseTest{
 		
 		log.info("click register link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Register");
-		registerPage.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("??????"), confirmPassword);	
+		registerPage.FillInformationOnRegisterForm(firstName, lastName, dataFaker.bothify("?????###@gmail.com"), dataFaker.letterify("??????"), confirmPassword);
 		
 		log.info("verify confirm password does not match.");
 		Assert.assertEquals(helper.getFieldValidationError(d, "ConfirmPassword"), EnContanst.ERR_MSG_REG_CPASSWORD_NOTMATCH);

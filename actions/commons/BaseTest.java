@@ -100,8 +100,8 @@ public class BaseTest {
 				break;
 		}
 		result.manage().window().maximize();
-		result.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-		result.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		//result.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+		result.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		return result;
 	}
 	

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -186,6 +188,22 @@ public class BasePage {
 	public void waitUntilElementClickable(WebDriver driver, String locatorPattern, String... params) {
 		wait = new WebDriverWait(driver, 2);
 		wait.until(ExpectedConditions.elementToBeClickable(getWebElement(driver, locatorPattern, params)));
+	}
+	
+	public void waitUntilElementVisible(WebDriver driver, String locatorPattern, String... params) {
+		wait = new WebDriverWait(driver, 2);
+		wait.until(ExpectedConditions.visibilityOf(getWebElement(driver, locatorPattern, params)));
+	}
+	
+	public Boolean waitUntilPageLoaded(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 5); //max timeout is 5 seconds. 
+		return wait.until(new ExpectedCondition<Boolean>() {
+			
+			public Boolean apply(WebDriver driverObj) {
+				return ((JavascriptExecutor) driverObj).executeScript("return document.readyState").equals("complete");
+			}
+			
+		});
 	}
 	
 }

@@ -44,6 +44,7 @@ public class Helper extends BasePage{
 	
 	public void selectItemFromDropdownByName(WebDriver driver, String name, String item) {
 		selectDefaultDropdown(driver, item, PatternUI.SEL_BY_NAME, name);
+		waitUntilPageLoaded(driver);
 	}
 	
 	public String getFieldValidationError(WebDriver driver, String containedID) {
@@ -52,6 +53,7 @@ public class Helper extends BasePage{
 	
 	public void clickButtonByClassAndText(WebDriver driver, String attrClass, String attrText) {
 		clickToElement(driver, PatternUI.BUTTON_BY_CLASS_AND_TEXT, attrClass, attrText);
+		waitUntilPageLoaded(driver);
 	}
 	
 	public boolean isRdoSelectedById(WebDriver driver, String id) {
@@ -69,6 +71,7 @@ public class Helper extends BasePage{
 	//click menu
 	public void clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
 		clickToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
+		waitUntilPageLoaded(driver);
 	}
 	
 	public boolean isLoginSuccessful(WebDriver driver) {
@@ -82,17 +85,6 @@ public class Helper extends BasePage{
 	
 	public String getBreadScrumText(WebDriver driver) {
 		return getTextElement(driver, CommonUI.BREADSCRUM);
-	}
-	
-	public Boolean waitUntilPageLoaded(WebDriver driver) {
-		WebDriverWait wait = new WebDriverWait(driver, 5); //max timeout is 5 seconds. 
-		return wait.until(new ExpectedCondition<Boolean>() {
-			
-			public Boolean apply(WebDriver driverObj) {
-				return ((JavascriptExecutor) driverObj).executeScript("return document.readyState").equals("complete");
-			}
-			
-		});
 	}
 	
 }

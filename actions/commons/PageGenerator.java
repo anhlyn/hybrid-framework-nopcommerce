@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageObject.BlogObject;
 import pageObject.ChangePasswordObject;
-import pageObject.DetailProductObject;
+import pageObject.DetailObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
 import pageObject.CustomerInfoObject;
@@ -14,6 +14,7 @@ import pageObject.RegisterObject;
 import pageObject.SearchObject;
 import pageObject.SitemapObject;
 import pageObject.SortObject;
+import pageObject.WishlistObject;
 
 public class PageGenerator {
 
@@ -57,11 +58,15 @@ public class PageGenerator {
 		return new SortObject(d);
 	}
 	
-	public static DetailProductObject getDetailPage(WebDriver d) {
-		return new DetailProductObject(d);
+	public static DetailObject getDetailPage(WebDriver d) {
+		return new DetailObject(d);
 	}
 	
 	public static MyReviewObject getMyReviewPage(WebDriver d) {
 		return new MyReviewObject(d);
+	}
+	
+	public static WishlistObject getWishlistPage(WebDriver d) {
+		return new WishlistObject(d);
 	}
 }

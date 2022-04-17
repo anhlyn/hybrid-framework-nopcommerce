@@ -27,4 +27,7 @@ public class EnContanst {
 	public static final String MSG_SEARCH_EMPTY_KEYWORD = "Search term minimum length is 3 characters";
 	public static final String MSG_SEARCH_NOT_EXISTS = "No products were found that matched your criteria.";
 	
+	public static final String MSG_WISHLIST_SUCCESS = "The product has been added to your wishlist";
+	public static final String MSG_WISHLIST_EMPTY = "The wishlist is empty!";
+	
 }

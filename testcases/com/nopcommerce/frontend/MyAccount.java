@@ -1,15 +1,11 @@
 package com.nopcommerce.frontend;
 
-import java.util.HashMap;
-
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import com.github.javafaker.Faker;
@@ -18,16 +14,15 @@ import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
+import pageObject.AddressObject;
 import pageObject.ChangePasswordObject;
-import pageObject.DetailProductObject;
+import pageObject.CustomerInfoObject;
+import pageObject.DetailObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
-import pageObject.CustomerInfoObject;
-import pageObject.AddressObject;
 import pageObject.MyReviewObject;
 import pageObject.RegisterObject;
 import pageObject.SearchObject;
-import pageUI.PatternUI;
 
 public class MyAccount extends BaseTest{
 	
@@ -250,7 +245,7 @@ public class MyAccount extends BaseTest{
 	private AddressObject addressPage;
 	private ChangePasswordObject changepassPage;
 	private SearchObject searchPage;
-	private DetailProductObject detailPage;
+	private DetailObject detailPage;
 	private MyReviewObject myreviewPage;
 	
 }
