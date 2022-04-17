@@ -30,4 +30,6 @@ public class EnContanst {
 	public static final String MSG_WISHLIST_SUCCESS = "The product has been added to your wishlist";
 	public static final String MSG_WISHLIST_EMPTY = "The wishlist is empty!";
 	
+	public static final String WISHLIST_H1_TITLE_NO_LOGIN = "Wishlist of";
+	
 }

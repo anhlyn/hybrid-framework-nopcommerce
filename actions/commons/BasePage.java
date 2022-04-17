@@ -87,11 +87,6 @@ public class BasePage {
 		return getWebElement(driver, locatorPattern, params).isEnabled();
 	}
 	
-	public boolean isWebElementNotExistsInHTML(WebDriver driver, String locatorPattern, String... params) {
-		List<WebElement> lst = getWebElements(driver, locatorPattern, params);
-		return (lst.size()==0);
-	}
-	
 	public void uncheckTheCheckbox(WebElement element) {
 		if(element.isSelected()) {
 			element.click();
@@ -204,6 +199,11 @@ public class BasePage {
 			}
 			
 		});
+	}
+	
+	public boolean isWebElementNotExistsInHTML(WebDriver driver, String locatorPattern, String... params) {
+		List<WebElement> lst = getWebElements(driver, locatorPattern, params);
+		return (lst.size()==0);
 	}
 	
 }

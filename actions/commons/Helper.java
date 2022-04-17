@@ -1,9 +1,6 @@
 package commons;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageUI.CommonUI;
 import pageUI.PatternUI;
@@ -24,6 +21,10 @@ public class Helper extends BasePage{
 	
 	public static Helper getHelper() {
 		return new Helper();
+	}
+	
+	public String getH1Title(WebDriver driver) {
+		return getTextElement(driver, CommonUI.PAGE_TITLE);
 	}
 	
 	public void typeInputById(WebDriver driver, String id, String text) {
@@ -85,6 +86,12 @@ public class Helper extends BasePage{
 	
 	public String getBreadScrumText(WebDriver driver) {
 		return getTextElement(driver, CommonUI.BREADSCRUM);
+	}
+	
+	public void closeBarNoti(WebDriver driver) {
+		if(isWebElementDisplayed(driver, CommonUI.BAR_NOTI_CLOSE)) {
+			clickToElement(driver, CommonUI.BAR_NOTI_CLOSE);
+		}
 	}
 	
 }

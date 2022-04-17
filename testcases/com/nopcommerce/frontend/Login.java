@@ -65,7 +65,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	}
 
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void Login_01_Empty_Data() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -83,7 +83,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_EMAIL);	
 	}
 	
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void Login_02_Invalid_Email() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -101,7 +101,7 @@ public class Login extends BaseTest{
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_WRONG_EMAIL);
 	}
 	
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void Login_03_Not_Registered_Email() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -119,7 +119,7 @@ public class Login extends BaseTest{
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_NOT_REGISTERED_EMAIL));
 	}
 	
-	@Test(enabled=true, dependsOnMethods = "Register_New_Account")
+	@Test(enabled=false, dependsOnMethods = "Register_New_Account")
 	public void Login_04_Empty_Password() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
@@ -136,7 +136,7 @@ public class Login extends BaseTest{
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
 	}
 	
-	@Test(enabled = true, dependsOnMethods = "Register_New_Account")
+	@Test(enabled = false, dependsOnMethods = "Register_New_Account")
 	public void Login_05_Wrong_Password() {
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");

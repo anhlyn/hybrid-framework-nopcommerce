@@ -1,11 +1,9 @@
 package pageObject;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import commons.BasePage;
+import pageUI.CommonUI;
 import pageUI.WishlistUI;
 
 public class WishlistObject extends BasePage{
@@ -26,6 +24,23 @@ public class WishlistObject extends BasePage{
 	
 	public void clickShareInfo() {
 		clickToElement(this.driver, WishlistUI.SHARE_INFO);
+	}
+	
+	public Boolean isAddToWishlistSuccess(String productName) {
+		if(this.isNotEmpty()) {
+			return isWebElementDisplayed(this.driver, WishlistUI.PRODUCT_NAME_ON_TABLE_BY_TEXT, productName);
+		}
+		return false;
+	}
+	
+	/*public Boolean isBarNotiSuccessAutoClosed() {
+		waitUntilElementInvisible(this.driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT);
+		return isWebElementNotExistsInHTML(this.driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT);
+	}*/
+	
+	public void clickShareInfoLink() {
+		clickToElement(this.driver, WishlistUI.SHARE_INFO);
+		waitUntilPageLoaded(this.driver);
 	}
 	
 	public void EmptyTheList() {
