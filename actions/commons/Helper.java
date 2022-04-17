@@ -1,6 +1,9 @@
 package commons;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageUI.CommonUI;
 import pageUI.PatternUI;
@@ -79,6 +82,17 @@ public class Helper extends BasePage{
 	
 	public String getBreadScrumText(WebDriver driver) {
 		return getTextElement(driver, CommonUI.BREADSCRUM);
+	}
+	
+	public Boolean waitUntilPageLoaded(WebDriver driver) {
+		WebDriverWait wait = new WebDriverWait(driver, 5); //max timeout is 5 seconds. 
+		return wait.until(new ExpectedCondition<Boolean>() {
+			
+			public Boolean apply(WebDriver driverObj) {
+				return ((JavascriptExecutor) driverObj).executeScript("return document.readyState").equals("complete");
+			}
+			
+		});
 	}
 	
 }
