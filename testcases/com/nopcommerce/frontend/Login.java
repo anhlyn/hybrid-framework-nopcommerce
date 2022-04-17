@@ -50,11 +50,12 @@ public class Login extends BaseTest{
 		
 		log.info("open homepage");
 		homePage.openHomepage();
-		log.info("verify open homepage");
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click register link on header");
-		helper.clickAnchorByClassAndText(d, "header-links", "Register");		
+		helper.clickAnchorByClassAndText(d, "header-links", "Register");	
+		helper.waitUntilPageLoaded(this.d);
 		registerPage.FillInformationOnRegisterForm(dataFaker.name().firstName(), dataFaker.name().lastName(), email, password, password);
 		
 		log.info("- verify register is successful.");
@@ -62,6 +63,7 @@ public class Login extends BaseTest{
 		
 		log.info("click logout link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log out");
+		helper.waitUntilPageLoaded(this.d);
 		log.info("verify after logout successfully and then redirect to homepage");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 	}
@@ -71,14 +73,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn("", "");
+		helper.waitUntilPageLoaded(this.d);
 		
 		log.info("Verify login with empty data.");
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_EMAIL);	
@@ -89,14 +94,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????##@???@??##"), password);
+		helper.waitUntilPageLoaded(this.d);
 		
 		log.info("Verify after login with invalid email.");
 		Assert.assertEquals(helper.getFieldValidationError(d, "Email"), EnContanst.ERR_MSG_LOGIN_WRONG_EMAIL);
@@ -107,14 +115,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 
 		loginPage.FillInfoAndClickLoginBtn(dataFaker.bothify("????###@????.com"), password);
+		helper.waitUntilPageLoaded(this.d);
 		
 		log.info("Verify login with not registered email.");
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_NOT_REGISTERED_EMAIL));
@@ -125,14 +136,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, "");
+		helper.waitUntilPageLoaded(this.d);
 		
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
 	}
@@ -142,14 +156,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, dataFaker.bothify("????####"));
+		helper.waitUntilPageLoaded(this.d);
 		
 		Assert.assertTrue(helper.getSummaryErrMsg(this.d).contains(EnContanst.ERR_MSG_LOGIN_WITH_EMPTY_PASSWORD));
 
@@ -160,14 +177,17 @@ public class Login extends BaseTest{
 		log.info("Login_01_Empty_Data");
 		log.info("- Step 1: open homepage");
 		homePage.openHomepage();
+		helper.waitUntilPageLoaded(this.d);
 		log.info("Verify open homepage successfully.");
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
 		log.info("click login link on header");
 		helper.clickAnchorByClassAndText(d, "header-links", "Log in");	
+		helper.waitUntilPageLoaded(this.d);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.LOGINPAGE_TITLE);
 		
 		loginPage.FillInfoAndClickLoginBtn(email, password);
+		helper.waitUntilPageLoaded(this.d);
 		System.out.println("email: " + email + " | pass: " + password);
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		Assert.assertTrue(helper.isLoginSuccessful(this.d));
