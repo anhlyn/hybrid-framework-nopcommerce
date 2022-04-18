@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageUI.CommonUI;
 import pageUI.PatternUI;
+import pageUI.WishlistUI;
 
 public class Helper extends BasePage{
 
@@ -71,6 +72,7 @@ public class Helper extends BasePage{
 	
 	//click menu
 	public void clickAnchorByClassAndText(WebDriver driver, String attrClass, String attrText) {
+		waitUntilElementClickable(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
 		clickToElement(driver, PatternUI.ANCHOR_BY_CLASS_AND_TEXT, attrClass, attrText);
 		waitUntilPageLoaded(driver);
 	}
@@ -91,6 +93,53 @@ public class Helper extends BasePage{
 	public void closeBarNoti(WebDriver driver) {
 		if(isWebElementDisplayed(driver, CommonUI.BAR_NOTI_CLOSE)) {
 			clickToElement(driver, CommonUI.BAR_NOTI_CLOSE);
+		}
+	}
+	
+	//common functions on table
+	public Boolean isTableNotEmpty(WebDriver driver) {
+		return isWebElementNotExistsInHTML(driver, CommonUI.NO_DATA);
+	}
+	
+	public String getNoDataMsgBelowTable(WebDriver driver) {
+		return getTextElement(driver, CommonUI.NO_DATA);
+	}
+	
+	public String getBarNotiSuccessMsg(WebDriver driver) {
+		waitUntilElementVisible(driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT);
+		if(isWebElementDisplayed(driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT)) {
+			return getTextElement(driver, CommonUI.BAR_NOTI_SUCCESS_CONTENT);
+		}
+		return "";
+	}
+	
+	public Boolean isProductNameOnProductGrid(WebDriver driver, String productName) {
+		if(isWebElementNotExistsInHTML(driver, CommonUI.PRODUCT_NAME_ON_PRODUCT_GRID_BY_TEXT, productName)) {
+			return false;
+		}
+		return isWebElementDisplayed(driver, CommonUI.PRODUCT_NAME_ON_PRODUCT_GRID_BY_TEXT, productName);
+	}
+	
+	public Boolean isProductNameInTable(WebDriver driver, String productName) {
+		if(isTableNotEmpty(driver)) {
+			return isWebElementDisplayed(driver, CommonUI.PRODUCT_NAME_ON_TABLE_BY_TEXT, productName);
+		}
+		return false;
+	}
+	
+	public void removeItemByProductName(WebDriver driver, String productName) {
+		clickToElement(driver, CommonUI.REMOVE_BUTTON_ON_TABLE_BY_PRODUCT_NAME, productName);
+		waitUntilPageLoaded(driver);	
+	}
+	
+	public void checkItemByProductName(WebDriver driver, String productName) {
+		clickToElement(driver, CommonUI.CHK_ON_TABLE_BY_PRODUCT_NAME, productName);
+	}
+	
+	public void EmptyTheList(WebDriver driver) {
+		while(!isWebElementNotExistsInHTML(driver, CommonUI.REMOVE_BUTTON_ON_TABLE)) {
+			clickToElement(driver, CommonUI.REMOVE_BUTTON_ON_TABLE);
+			waitUntilPageLoaded(driver);
 		}
 	}
 	

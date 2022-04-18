@@ -29,4 +29,9 @@ public class HomeObject extends BasePage{
 		waitUntilPageLoaded(driver);
 	}
 	
+	public void addToComparelistByProductName(String productName) {
+		clickToElement(this.driver, HomeUI.BTN_ADD_TO_COMPARELIST_BY_PRODUCT_TITLE, productName);
+		waitUntilPageLoaded(driver);
+	}
+	
 }

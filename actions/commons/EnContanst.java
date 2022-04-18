@@ -28,8 +28,12 @@ public class EnContanst {
 	public static final String MSG_SEARCH_NOT_EXISTS = "No products were found that matched your criteria.";
 	
 	public static final String MSG_WISHLIST_SUCCESS = "The product has been added to your wishlist";
+	public static final String MSG_COMPARE_SUCCESS = "The product has been added to your product comparison";
 	public static final String MSG_WISHLIST_EMPTY = "The wishlist is empty!";
+	public static final String MSG_CART_EMPTY = "Your Shopping Cart is empty!";
 	
 	public static final String WISHLIST_H1_TITLE_NO_LOGIN = "Wishlist of";
+	
+	public static final String COMPARELIST_EMPTY = "You have no items to compare.";
 	
 }

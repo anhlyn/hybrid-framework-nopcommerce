@@ -12,4 +12,14 @@ public class CommonUI {
 	
 	public static final String BREADSCRUM = "//div[@class='breadcrumb']";
 	public static final String AJAX_PRODUCTS_BUSY = "//div[@class='ajax-products-busy']";
+	
+	public static final String CONTENT = "//div[@class='table-wrapper']";
+	public static final String NO_DATA = "//div[@class='no-data']";
+	
+	public static final String REMOVE_BUTTON_ON_TABLE = "//td[@class='remove-from-cart']/button";
+	public static final String REMOVE_BUTTON_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//button";
+	public static final String CHK_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//input";
+	public static final String PRODUCT_NAME_ON_TABLE_BY_TEXT = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']";
+	
+	public static final String PRODUCT_NAME_ON_PRODUCT_GRID_BY_TEXT = "//div[@class='product-grid']//h2[@class='product-title']/a[text()='%s']";
 }

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageObject.BlogObject;
 import pageObject.ChangePasswordObject;
+import pageObject.CompareProductObject;
 import pageObject.DetailObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
@@ -60,6 +61,10 @@ public class PageGenerator {
 	
 	public static DetailObject getDetailPage(WebDriver d) {
 		return new DetailObject(d);
+	}
+	
+	public static CompareProductObject getComparePage(WebDriver d) {
+		return new CompareProductObject(d);
 	}
 	
 	public static MyReviewObject getMyReviewPage(WebDriver d) {

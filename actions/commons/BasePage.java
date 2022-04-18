@@ -181,7 +181,7 @@ public class BasePage {
 	}
 	
 	public void waitUntilElementClickable(WebDriver driver, String locatorPattern, String... params) {
-		wait = new WebDriverWait(driver, 2);
+		wait = new WebDriverWait(driver, 3);
 		wait.until(ExpectedConditions.elementToBeClickable(getWebElement(driver, locatorPattern, params)));
 	}
 	
