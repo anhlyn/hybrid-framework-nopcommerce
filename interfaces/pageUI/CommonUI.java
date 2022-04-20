@@ -19,7 +19,22 @@ public class CommonUI {
 	public static final String REMOVE_BUTTON_ON_TABLE = "//td[@class='remove-from-cart']/button";
 	public static final String REMOVE_BUTTON_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//button";
 	public static final String CHK_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//input";
+	public static final String ATTR_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/following-sibling::div[@class='attributes']";
+	public static final String TOTAL_PRICE_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//span[@class='product-subtotal']";
 	public static final String PRODUCT_NAME_ON_TABLE_BY_TEXT = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']";
+	public static final String TXT_QTY_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//a[@class='product-name' and text()='%s']/ancestor::tr//input[@class='qty-input']";
 	
 	public static final String PRODUCT_NAME_ON_PRODUCT_GRID_BY_TEXT = "//div[@class='product-grid']//h2[@class='product-title']/a[text()='%s']";
+	
+	public static final String FLYOUT_CART_ACTIVE = "//div[@id='flyout-cart']";
+	public static final String FLYOUT_CART_COUNT = "//div[@id='flyout-cart']//div[@class='count']/a";
+	public static final String FLYOUT_CART_PRODUCT_NAME = "//div[@id='flyout-cart']//div[@class='name']/a";
+	public static final String FLYOUT_CART_ATTR = "//div[@id='flyout-cart']//div[@class='attributes']";
+	public static final String FLYOUT_CART_QTY = "//div[@id='flyout-cart']//div[@class='quantity']/span";
+	public static final String FLYOUT_CART_PRICE = "//div[@id='flyout-cart']//div[@class='totals']/strong";
+	
+	public static final String EDIT_LINK_ON_TABLE_BY_PRODUCT_NAME = "//div[@class='table-wrapper']//td[@class='product']/a[text()='%s']/following-sibling::div[@class='edit-item']/a";
+	
 }
+
+

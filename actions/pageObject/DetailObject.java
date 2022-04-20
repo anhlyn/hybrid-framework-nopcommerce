@@ -31,6 +31,29 @@ public class DetailObject extends BasePage{
 		clickToElement(this.driver, DetailUI.BTN_ADD_TO_WISHLIST);
 	}
 	
+	public void selectItemFromSelByLabel(String label, String item) {
+		selectDefaultDropdown(this.driver, item, DetailUI.PRODUCT_SEL_BY_LABEL, label);
+		waitUntilPageLoaded(this.driver);
+	}
+	
+	public void clickRdoByLabel(String label) {
+		clickToElement(this.driver, DetailUI.PRODUCT_RDO_BY_LABEL, label);
+		waitUntilPageLoaded(this.driver);
+	}
+	
+	public void clickChkByLabel(String label) {
+		clickToElement(this.driver, DetailUI.PRODUCT_CHK_BY_LABEL, label);
+		waitUntilPageLoaded(this.driver);
+	}
+	
+	public void typeQty(String qty) {
+		sendKeyToElement(this.driver, DetailUI.TXT_QTY, qty);
+		waitUntilPageLoaded(this.driver);
+	}
+	
+	public String getProductPrice() {
+		return getTextElement(this.driver, DetailUI.PRODUCT_PRICE);
+	}
 	/*public void addReview(String title, String text, String rate) {
 		List<WebElement> elements = getWebElements(driver, DetailProductUI.ADD_REVIEW, "Add your review");
 		if(elements.size() == 0) {

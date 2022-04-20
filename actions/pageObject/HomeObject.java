@@ -34,4 +34,9 @@ public class HomeObject extends BasePage{
 		waitUntilPageLoaded(driver);
 	}
 	
+	public void addToCartByProductName(String productName) {
+		clickToElement(this.driver, HomeUI.BTN_ADD_TO_CART_BY_PRODUCT_TITLE, productName);
+		waitUntilPageLoaded(driver);
+	}
+	
 }

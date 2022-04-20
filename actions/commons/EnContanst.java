@@ -31,9 +31,12 @@ public class EnContanst {
 	public static final String MSG_COMPARE_SUCCESS = "The product has been added to your product comparison";
 	public static final String MSG_WISHLIST_EMPTY = "The wishlist is empty!";
 	public static final String MSG_CART_EMPTY = "Your Shopping Cart is empty!";
+	public static final String MSG_ADD_TO_CART_SUCCESS = "The product has been added to your shopping cart";
+	public static final String SHOPPING_CART_TEXT_HEADER_LINK = "Shopping cart (%s)";
 	
 	public static final String WISHLIST_H1_TITLE_NO_LOGIN = "Wishlist of";
 	
 	public static final String COMPARELIST_EMPTY = "You have no items to compare.";
+	public static final String FLYOUT_CART_COUNT = "%s item(s)";
 	
 }
