@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import pageObject.BlogObject;
 import pageObject.ChangePasswordObject;
+import pageObject.CheckoutObject;
 import pageObject.CompareProductObject;
 import pageObject.DetailObject;
 import pageObject.HomeObject;
@@ -73,5 +74,9 @@ public class PageGenerator {
 	
 	public static WishlistObject getWishlistPage(WebDriver d) {
 		return new WishlistObject(d);
+	}
+	
+	public static CheckoutObject getCheckoutPage(WebDriver d) {
+		return new CheckoutObject(d);
 	}
 }

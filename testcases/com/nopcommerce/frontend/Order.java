@@ -10,12 +10,16 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.nopcommerce.frontend.DataTest.Billing;
+import com.nopcommerce.frontend.DataTest.Payment;
 import com.nopcommerce.frontend.DataTest.RegisteredAccount;
+import com.nopcommerce.frontend.DataTest.Shipping;
 
 import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
+import pageObject.CheckoutObject;
 import pageObject.DetailObject;
 import pageObject.HomeObject;
 import pageObject.LoginObject;
@@ -28,6 +32,9 @@ public class Order extends BaseTest{
 	private Helper helper;
 	private DataTest datatest;
 	private RegisteredAccount registeredAcc;
+	private Billing billing;
+	private Shipping shipping;
+	private Payment payment;
 	private String productName = "Build your own computer";
 	
 	private String lblProcessor = "Processor";
@@ -53,11 +60,15 @@ public class Order extends BaseTest{
 		//init data
 		datatest = new DataTest();
 		registeredAcc = datatest.new RegisteredAccount();
+		billing = datatest.new Billing();
+		shipping = datatest.new Shipping();
+		payment = datatest.new Payment();
 		
 		homePage = PageGenerator.getHomePage(d);
 		loginPage = PageGenerator.getLoginPage(d);
 		registerPage = PageGenerator.getRegisterPage(d);
 		detailPage = PageGenerator.getDetailPage(d);
+		checkoutPage = PageGenerator.getCheckoutPage(d);
 	}
 	
 	@Test(enabled=true)
@@ -229,8 +240,8 @@ public class Order extends BaseTest{
 		Assert.assertEquals(helper.getTotalPriceOnTableByProductName(this.d, this.productName), "$1,225.00");
 	}
 	
-	@Test(enabled=true, dependsOnMethods = "Login_06_Success")
-	public void TC_05_Checkout() {
+	@Test(enabled=false, dependsOnMethods = "Login_06_Success")
+	public void TC_05_Checkout_By_Check() {
 		homePage.openHomepage();
 		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
 		
@@ -249,6 +260,181 @@ public class Order extends BaseTest{
 		
 		//main steps
 		helper.clickAnchorByClassAndText(this.d, "header-links", "Shopping cart");
+		//check agree term of service
+		checkoutPage.ChkAgreeTermOfService();
+		//click <CHECKOUT>
+		helper.clickButtonByClassAndText(this.d, "checkout-buttons", " Checkout ");
+		//if session expired and then log out
+		if(Helper.getCurrentPageUrl(this.d).contains("checkoutasguest")) {
+			loginPage.FillInfoAndClickLoginBtn(this.registeredAcc.email, this.registeredAcc.password);
+			Assert.assertTrue(helper.isLoginSuccessful(this.d));
+		}
+		checkoutPage.UncheckChkShipToSameAddress();
+		checkoutPage.FillBillingAddressForm(billing.convertToHashMap());
+		checkoutPage.FillNewShippingAddress(shipping.convertToHashMap());
+		checkoutPage.ChooseShippingMethodAndClickContinue(shipping.method);
+		checkoutPage.ChoosePaymentMethodAndClickContiue(payment.method);
+		checkoutPage.clickPaymentInfoContinue();
+		//Verify Confirm Order
+		String confirmBilling = checkoutPage.getConfirmBilling();
+		Assert.assertTrue(confirmBilling.contains(String.format("%s %s", billing.firstName, billing.lastName)));
+		Assert.assertTrue(confirmBilling.contains(billing.email));
+		Assert.assertTrue(confirmBilling.contains(billing.phone));
+		Assert.assertTrue(confirmBilling.contains(billing.address1));
+		Assert.assertTrue(confirmBilling.contains(String.format("%s,%s", billing.city, billing.zip)));
+		Assert.assertTrue(confirmBilling.contains(billing.country));
+		
+		String confirmShipping = checkoutPage.getConfirmShipping();
+		Assert.assertTrue(confirmShipping.contains(String.format("%s %s", shipping.firstName, shipping.lastName)));
+		Assert.assertTrue(confirmShipping.contains(shipping.email));
+		Assert.assertTrue(confirmShipping.contains(shipping.phone));
+		Assert.assertTrue(confirmShipping.contains(shipping.address1));
+		Assert.assertTrue(confirmShipping.contains(String.format("%s,%s", shipping.city, shipping.zip)));
+		Assert.assertTrue(confirmShipping.contains(shipping.country));
+		
+		Assert.assertEquals(checkoutPage.getConfirmPaymentMethod(), payment.method);
+		Assert.assertTrue(shipping.method.contains(checkoutPage.getConfirmShippingMethod()));
+		Assert.assertTrue(helper.isProductNameInTable(this.d, this.productName));
+		
+		//click Confirm
+		checkoutPage.clickConfirmOrder();
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("checkout/completed"));
+	}
+	
+	@Test(enabled=false, dependsOnMethods = "Login_06_Success")
+	public void TC_06_Checkout_Credit_Card(){
+		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		helper.clickAnchorByClassAndText(this.d, "header-links", "Shopping cart");
+		helper.EmptyTheList(this.d);
+		Assert.assertEquals(helper.getNoDataMsgBelowTable(this.d), EnContanst.MSG_CART_EMPTY);
+		
+		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		this.productName = "HTC One M8 Android L 5.0 Lollipop";
+		homePage.addToCartByProductName(productName);
+		helper.getBarNotiSuccessMsg(this.d);
+		helper.closeBarNoti(this.d);
+		Assert.assertEquals(helper.getTextFromHeaderLink(this.d, "Shopping cart"), String.format(EnContanst.SHOPPING_CART_TEXT_HEADER_LINK, "1"));
+		
+		//main steps
+		helper.clickAnchorByClassAndText(this.d, "header-links", "Shopping cart");
+		//check agree term of service
+		checkoutPage.ChkAgreeTermOfService();
+		//click <CHECKOUT>
+		helper.clickButtonByClassAndText(this.d, "checkout-buttons", " Checkout ");
+		//if session expired and then log out
+		if(Helper.getCurrentPageUrl(this.d).contains("checkoutasguest")) {
+			loginPage.FillInfoAndClickLoginBtn(this.registeredAcc.email, this.registeredAcc.password);
+			Assert.assertTrue(helper.isLoginSuccessful(this.d));
+		}
+		checkoutPage.UncheckChkShipToSameAddress();
+		checkoutPage.FillBillingAddressForm(billing.convertToHashMap());
+		checkoutPage.FillNewShippingAddress(shipping.convertToHashMap());
+		checkoutPage.ChooseShippingMethodAndClickContinue(shipping.method);
+		
+		//Change payment datatest to: Credit Card
+		payment.method = "Credit Card";
+		checkoutPage.ChoosePaymentMethodAndClickContiue(payment.method);
+		
+		checkoutPage.FillNewCreditCard(payment.convertToHashMap());
+		//Verify Confirm Order
+		String confirmBilling = checkoutPage.getConfirmBilling();
+		Assert.assertTrue(confirmBilling.contains(String.format("%s %s", billing.firstName, billing.lastName)));
+		Assert.assertTrue(confirmBilling.contains(billing.email));
+		Assert.assertTrue(confirmBilling.contains(billing.phone));
+		Assert.assertTrue(confirmBilling.contains(billing.address1));
+		Assert.assertTrue(confirmBilling.contains(String.format("%s,%s", billing.city, billing.zip)));
+		Assert.assertTrue(confirmBilling.contains(billing.country));
+		
+		String confirmShipping = checkoutPage.getConfirmShipping();
+		Assert.assertTrue(confirmShipping.contains(String.format("%s %s", shipping.firstName, shipping.lastName)));
+		Assert.assertTrue(confirmShipping.contains(shipping.email));
+		Assert.assertTrue(confirmShipping.contains(shipping.phone));
+		Assert.assertTrue(confirmShipping.contains(shipping.address1));
+		Assert.assertTrue(confirmShipping.contains(String.format("%s,%s", shipping.city, shipping.zip)));
+		Assert.assertTrue(confirmShipping.contains(shipping.country));
+		
+		Assert.assertEquals(checkoutPage.getConfirmPaymentMethod(), payment.method);
+		Assert.assertTrue(shipping.method.contains(checkoutPage.getConfirmShippingMethod()));
+		Assert.assertTrue(helper.isProductNameInTable(this.d, this.productName));
+		
+		//click Confirm
+		checkoutPage.clickConfirmOrder();
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("checkout/completed"));
+	}
+	
+	@Test(enabled=true, dependsOnMethods = "Login_06_Success")
+	public void TC_07_Re_Order(){
+		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		helper.clickAnchorByClassAndText(this.d, "header-links", "Shopping cart");
+		helper.EmptyTheList(this.d);
+		Assert.assertEquals(helper.getNoDataMsgBelowTable(this.d), EnContanst.MSG_CART_EMPTY);
+		
+		homePage.openHomepage();
+		Assert.assertEquals(Helper.getPageTitle(this.d), EnContanst.HOMEPAGE_TITLE);
+		
+		this.productName = "HTC One M8 Android L 5.0 Lollipop";
+		homePage.addToCartByProductName(productName);
+		helper.getBarNotiSuccessMsg(this.d);
+		helper.closeBarNoti(this.d);
+		Assert.assertEquals(helper.getTextFromHeaderLink(this.d, "Shopping cart"), String.format(EnContanst.SHOPPING_CART_TEXT_HEADER_LINK, "1"));
+		
+		//main steps
+		helper.clickAnchorByClassAndText(this.d, "header-links", "Shopping cart");
+		//check agree term of service
+		checkoutPage.ChkAgreeTermOfService();
+		//click <CHECKOUT>
+		helper.clickButtonByClassAndText(this.d, "checkout-buttons", " Checkout ");
+		//if session expired and then log out
+		if(Helper.getCurrentPageUrl(this.d).contains("checkoutasguest")) {
+			loginPage.FillInfoAndClickLoginBtn(this.registeredAcc.email, this.registeredAcc.password);
+			Assert.assertTrue(helper.isLoginSuccessful(this.d));
+		}
+		checkoutPage.UncheckChkShipToSameAddress();
+		checkoutPage.FillBillingAddressForm(billing.convertToHashMap());
+		checkoutPage.FillNewShippingAddress(shipping.convertToHashMap());
+		checkoutPage.ChooseShippingMethodAndClickContinue(shipping.method);
+		
+		payment.method = "Check / Money Order";
+		checkoutPage.ChoosePaymentMethodAndClickContiue(payment.method);
+		checkoutPage.clickPaymentInfoContinue();
+		//Verify Confirm Order
+		String confirmBilling = checkoutPage.getConfirmBilling();
+		Assert.assertTrue(confirmBilling.contains(String.format("%s %s", billing.firstName, billing.lastName)));
+		Assert.assertTrue(confirmBilling.contains(billing.email));
+		Assert.assertTrue(confirmBilling.contains(billing.phone));
+		Assert.assertTrue(confirmBilling.contains(billing.address1));
+		Assert.assertTrue(confirmBilling.contains(String.format("%s,%s", billing.city, billing.zip)));
+		Assert.assertTrue(confirmBilling.contains(billing.country));
+		
+		String confirmShipping = checkoutPage.getConfirmShipping();
+		Assert.assertTrue(confirmShipping.contains(String.format("%s %s", shipping.firstName, shipping.lastName)));
+		Assert.assertTrue(confirmShipping.contains(shipping.email));
+		Assert.assertTrue(confirmShipping.contains(shipping.phone));
+		Assert.assertTrue(confirmShipping.contains(shipping.address1));
+		Assert.assertTrue(confirmShipping.contains(String.format("%s,%s", shipping.city, shipping.zip)));
+		Assert.assertTrue(confirmShipping.contains(shipping.country));
+		
+		Assert.assertEquals(checkoutPage.getConfirmPaymentMethod(), payment.method);
+		Assert.assertTrue(shipping.method.contains(checkoutPage.getConfirmShippingMethod()));
+		Assert.assertTrue(helper.isProductNameInTable(this.d, this.productName));
+		
+		//click Confirm
+		checkoutPage.clickConfirmOrder();
+		helper.waitUntilPageLoaded(this.d);
+		Assert.assertTrue(Helper.getCurrentPageUrl(this.d).contains("checkout/completed"));
+		datatest.orderNumber = checkoutPage.getOrderNumber();
+		
+		//main steps
+		//click <My Account>
+		helper.clickAnchorByClassAndText(this.d, "header-links", "My account");
+		helper.clickAnchorByClassAndText(this.d, "side-2", "Orders");
+		checkoutPage.clickDetailOnOrderMenu(datatest.orderNumber);
 	}
 	
 	private void View_Detail_Page(String parentMenu, String childMenu, String pn) {
@@ -270,5 +456,6 @@ public class Order extends BaseTest{
 	private LoginObject loginPage;
 	private RegisterObject registerPage;
 	private DetailObject detailPage;
+	private CheckoutObject checkoutPage;
 	
 }

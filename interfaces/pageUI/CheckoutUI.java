@@ -34,11 +34,22 @@ public class CheckoutUI {
 	public static final String RDO_PAYMENT_METHOD_BY_LBL_TEXT = "//label[text()='%s']/preceding-sibling::input[@type='radio']";
 	public static final String BTN_PAYMENT_METHOD_CONTINUE = "//div[@id='payment-method-buttons-container']/button[text()='Continue']";
 	
+	public static final String SEL_CREDIT_CARD_TYPE = "//select[@id='CreditCardType']";
+	public static final String CARD_HOLDER_NAME = "//input[@id='CardholderName']";
+	public static final String CARD_NUMBER = "//input[@id='CardNumber']";
+	public static final String CARD_EXPIRED_MONTH = "//select[@id='ExpireMonth']";
+	public static final String CARD_EXPIRED_YEAR = "//select[@id='ExpireYear']";
+	public static final String CARD_CODE = "//input[@id='CardCode']";
+	public static final String BTN_PAYMENT_INFO_CONTINUE = "//div[@id='payment-info-buttons-container']/button[text()='Continue']";
+	
 	//CONFIRM ORDER
 	public static final String CONFIRM_ORDER_BILLING_INFO = "//div[@class='billing-info']//ul[@class='info-list']";
 	public static final String CONFIRM_ORDER_SHIPPING_INFO = "//div[@class='shipping-info']//ul[@class='info-list']";
 	public static final String CONFIRM_ORDER_SHIPPING_METHOD = "//li[@class='shipping-method']/span[@class='value']"; //Next Day Air
 	public static final String CONFIRM_ORDER_PAYMENT_METHOD = "//li[@class='payment-method']/span[@class='value']"; //Check / Money Order
+	public static final String BTN_CONFIRM_ORDER = "//div[@id='confirm-order-buttons-container']//button[text()='Confirm']";
+	public static final String ORDER_NUMBER = "//div[@class='order-number']/strong";
 	
-	
+	public static final String DETAIL_BY_ORDER_NUMBER = "//div[@class='title']/strong[text()='Order Number: %s']/parent::div/following-sibling::div[@class='buttons']/button[text()='Details']";
+	public static final String RE_ORDER_BUTTON = "//button[text()='Re-order']";
 }
