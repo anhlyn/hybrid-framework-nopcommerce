@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.Helper;
-import pageUI.RegisterUI;
+import frontend.RegisterUI;
 
 public class RegisterObject extends BasePage {
 

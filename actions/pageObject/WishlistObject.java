@@ -3,7 +3,7 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.WishlistUI;
+import frontend.WishlistUI;
 
 public class WishlistObject extends BasePage{
 	

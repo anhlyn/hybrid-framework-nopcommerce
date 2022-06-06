@@ -1,4 +1,4 @@
-package pageUI;
+package frontend;
 
 public class CommonUI {
 	public static final String PAGE_TITLE = "//div[@class='page-title']/h1";

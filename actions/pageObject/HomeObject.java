@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.GlobalContants;
-import pageUI.HomeUI;
+import frontend.HomeUI;
 
 public class HomeObject extends BasePage{
 	

@@ -7,8 +7,8 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.CommonUI;
-import pageUI.SortUI;
+import frontend.CommonUI;
+import frontend.SortUI;
 
 public class SortObject extends BasePage{
 	

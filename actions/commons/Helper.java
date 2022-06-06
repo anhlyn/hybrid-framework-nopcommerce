@@ -2,10 +2,10 @@ package commons;
 
 import org.openqa.selenium.WebDriver;
 
-import pageUI.CartUI;
-import pageUI.CommonUI;
-import pageUI.PatternUI;
-import pageUI.WishlistUI;
+import frontend.CartUI;
+import frontend.CommonUI;
+import frontend.PatternUI;
+import frontend.WishlistUI;
 
 public class Helper extends BasePage{
 

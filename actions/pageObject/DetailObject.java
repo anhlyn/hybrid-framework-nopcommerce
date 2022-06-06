@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import commons.BasePage;
-import pageUI.DetailProductUI;
-import pageUI.DetailUI;
+import frontend.DetailProductUI;
+import frontend.DetailUI;
 
 public class DetailObject extends BasePage{
 	

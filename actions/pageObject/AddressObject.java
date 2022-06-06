@@ -3,7 +3,7 @@ package pageObject;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.AddressesUI;
+import frontend.AddressesUI;
 
 public class AddressObject extends BasePage{
 	

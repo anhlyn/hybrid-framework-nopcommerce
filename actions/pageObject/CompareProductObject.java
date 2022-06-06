@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.GlobalContants;
-import pageUI.CompareProductUI;
-import pageUI.HomeUI;
+import frontend.CompareProductUI;
+import frontend.HomeUI;
 
 public class CompareProductObject extends BasePage{
 	

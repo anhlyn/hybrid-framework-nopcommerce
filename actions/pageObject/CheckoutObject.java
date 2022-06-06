@@ -6,8 +6,8 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.Helper;
-import pageUI.CartUI;
-import pageUI.CheckoutUI;
+import frontend.CartUI;
+import frontend.CheckoutUI;
 
 public class CheckoutObject extends BasePage{
 	

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.Helper;
-import pageUI.LoginUI;
+import frontend.LoginUI;
 
 public class LoginObject extends BasePage{
 	

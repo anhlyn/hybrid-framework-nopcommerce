@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
-import pageUI.MyReviewUI;
+import frontend.MyReviewUI;
 
 public class MyReviewObject extends BasePage{
 	

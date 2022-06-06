@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 
 import commons.BasePage;
 import commons.EnContanst;
-import pageUI.ChangePasswordUI;
-import pageUI.CommonUI;
+import frontend.ChangePasswordUI;
+import frontend.CommonUI;
 
 public class ChangePasswordObject extends BasePage{
 	
