@@ -19,11 +19,11 @@ import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
-import pageObject.CheckoutObject;
-import pageObject.DetailObject;
-import pageObject.HomeObject;
-import pageObject.LoginObject;
-import pageObject.RegisterObject;
+import pageObject.frontend.CheckoutObject;
+import pageObject.frontend.DetailObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.LoginObject;
+import pageObject.frontend.RegisterObject;
 
 
 public class Order extends BaseTest{

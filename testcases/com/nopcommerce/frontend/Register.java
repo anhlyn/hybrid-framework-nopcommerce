@@ -14,8 +14,8 @@ import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
-import pageObject.HomeObject;
-import pageObject.RegisterObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.RegisterObject;
 
 public class Register extends BaseTest{
 	

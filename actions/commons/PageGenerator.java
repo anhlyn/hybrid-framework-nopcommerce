@@ -2,21 +2,21 @@ package commons;
 
 import org.openqa.selenium.WebDriver;
 
-import pageObject.BlogObject;
-import pageObject.ChangePasswordObject;
-import pageObject.CheckoutObject;
-import pageObject.CompareProductObject;
-import pageObject.DetailObject;
-import pageObject.HomeObject;
-import pageObject.LoginObject;
-import pageObject.CustomerInfoObject;
-import pageObject.AddressObject;
-import pageObject.MyReviewObject;
-import pageObject.RegisterObject;
-import pageObject.SearchObject;
-import pageObject.SitemapObject;
-import pageObject.SortObject;
-import pageObject.WishlistObject;
+import pageObject.frontend.AddressObject;
+import pageObject.frontend.BlogObject;
+import pageObject.frontend.ChangePasswordObject;
+import pageObject.frontend.CheckoutObject;
+import pageObject.frontend.CompareProductObject;
+import pageObject.frontend.CustomerInfoObject;
+import pageObject.frontend.DetailObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.LoginObject;
+import pageObject.frontend.MyReviewObject;
+import pageObject.frontend.RegisterObject;
+import pageObject.frontend.SearchObject;
+import pageObject.frontend.SitemapObject;
+import pageObject.frontend.SortObject;
+import pageObject.frontend.WishlistObject;
 
 public class PageGenerator {
 

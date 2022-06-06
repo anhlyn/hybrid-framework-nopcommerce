@@ -1,4 +1,4 @@
-package pageObject;
+package pageObject.frontend;
 
 import org.openqa.selenium.WebDriver;
 
@@ -23,9 +23,5 @@ public class LoginObject extends BasePage{
 		}
 		Helper.getHelper().clickButtonByClassAndText(this.driver, "buttons", "Log in");
 	}
-	
-	/*public boolean isLoginSuccess() {
-		//return isWebElementDisplayed(driver, PatternUI.HEADER_LINKS_PATTERN, "logout");
-	}*/
 	
 }

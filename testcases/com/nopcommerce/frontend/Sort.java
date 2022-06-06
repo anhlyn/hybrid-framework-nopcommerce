@@ -13,8 +13,8 @@ import org.testng.annotations.Parameters;
 import commons.BaseTest;
 import commons.Helper;
 import commons.PageGenerator;
-import pageObject.HomeObject;
-import pageObject.SortObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.SortObject;
 
 
 public class Sort extends BaseTest{

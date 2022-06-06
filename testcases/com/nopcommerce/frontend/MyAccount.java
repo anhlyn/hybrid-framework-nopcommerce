@@ -14,15 +14,15 @@ import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
-import pageObject.AddressObject;
-import pageObject.ChangePasswordObject;
-import pageObject.CustomerInfoObject;
-import pageObject.DetailObject;
-import pageObject.HomeObject;
-import pageObject.LoginObject;
-import pageObject.MyReviewObject;
-import pageObject.RegisterObject;
-import pageObject.SearchObject;
+import pageObject.frontend.AddressObject;
+import pageObject.frontend.ChangePasswordObject;
+import pageObject.frontend.CustomerInfoObject;
+import pageObject.frontend.DetailObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.LoginObject;
+import pageObject.frontend.MyReviewObject;
+import pageObject.frontend.RegisterObject;
+import pageObject.frontend.SearchObject;
 
 public class MyAccount extends BaseTest{
 	

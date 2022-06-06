@@ -1,4 +1,4 @@
-package pageObject;
+package pageObject.frontend;
 
 import java.util.List;
 

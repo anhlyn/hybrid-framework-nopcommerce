@@ -17,9 +17,9 @@ import commons.BaseTest;
 import commons.EnContanst;
 import commons.Helper;
 import commons.PageGenerator;
-import pageObject.HomeObject;
-import pageObject.LoginObject;
-import pageObject.RegisterObject;
+import pageObject.frontend.HomeObject;
+import pageObject.frontend.LoginObject;
+import pageObject.frontend.RegisterObject;
 
 
 public class Login extends BaseTest{
