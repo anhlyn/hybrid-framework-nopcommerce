@@ -51,6 +51,10 @@ public class BasePage {
 		return result;
 	}
 	
+	public String getCurrentUrl(WebDriver driver){
+		return driver.getCurrentUrl();
+	}
+	
 	public String getTextElement(WebElement element) {
 		return element.getText();
 	}

@@ -39,4 +39,6 @@ public class EnContanst {
 	public static final String COMPARELIST_EMPTY = "You have no items to compare.";
 	public static final String FLYOUT_CART_COUNT = "%s item(s)";
 	
+	public static final String MSG_ADMIN_SEARCH_DATATABLE_EMPTY = "No data available in table";
+	
 }
