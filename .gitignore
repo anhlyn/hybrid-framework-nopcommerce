@@ -3,3 +3,6 @@
 .settings/
 bin/
 test-output/
+out/
+hybrid-framework-nopcommerce.iml
+.idea/
